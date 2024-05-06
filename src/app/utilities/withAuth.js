@@ -18,9 +18,11 @@ const withAuth = (WrappedComponent) => {
     useEffect(() => {
       const checkAuth = async () => {
         try {
-          const accessToken = Cookies.get("auth_token");
+          const { data: session } = useSession();
+          const user = session?.user;
 
-          if (!accessToken) {
+
+          if (!user) {
             console.log('Access token not found, redirecting to login');
             router.replace('/'); 
             return;
