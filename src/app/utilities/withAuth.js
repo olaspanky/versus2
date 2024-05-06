@@ -1,44 +1,29 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUser, clearUser, selectUser } from '../store/slice/userSlice';
-import UserPool from '../UserPool';
-import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/slice/userSlice';
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 
-
 const withAuth = (WrappedComponent) => {
-
   const AuthComponent = (props) => {
     const dispatch = useDispatch();
     const router = useRouter();
+    const { data: session, status } = useSession();
 
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       const checkAuth = async () => {
         try {
-          const { data: session } = useSession();
-          const user = session?.user;
-
-
-          if (!user) {
+          if (!session) {
             console.log('Access token not found, redirecting to login');
             router.replace('/'); 
             return;
           }
 
-          // const tokenExpiration = new Date(
-          //   JSON.parse(atob(accessToken.split('.')[1])).exp * 1000
-          // );
-          // if (tokenExpiration < new Date()) {
-          //   console.log('Access token expired, redirecting to login');
-          //   router.replace('/'); 
-          // }
+          // Assuming you have an accessToken in the session object
+          dispatch(setUser({ accessToken: session.accessToken }));
 
-          // console.log('Access Token:', accessToken);
-         
-          dispatch(setUser({ accessToken }));
         } catch (error) {
           console.error('Authentication error:', error);
           router.replace('/error');
@@ -48,10 +33,10 @@ const withAuth = (WrappedComponent) => {
       };
 
       checkAuth();
-    }, [dispatch, router]);
+    }, [dispatch, router, session]);
 
-    // If isLoading is true, return a loading indicator or message
-    if (isLoading) {
+    // If session status is loading, return a loading indicator or message
+    if (status === "loading") {
       return <div>Loading...</div>;
     }
 
