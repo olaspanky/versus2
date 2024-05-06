@@ -48,6 +48,7 @@ const Sidebar = ({ title, icon, subItems }) => {
 
       router.push('/');
       Cookies.remove('atc') 
+      Cookies.remove('auth_token') 
 
     } catch (error) {
       console.error("Error signing out:", error);
