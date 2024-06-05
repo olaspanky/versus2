@@ -216,8 +216,13 @@ export const authOptions = {
           }
 
           // Check if user is already logged in
+          if (user.isLoggedIn && !passwordsMatch) {
+            // Return null to prevent login and throw an error message
+            throw new Error("You are already logged in on another device or tab.");
+          }
           if (user.isLoggedIn) {
             return null;
+
           }
 
           // Update isLoggedIn to true since the user is logging in

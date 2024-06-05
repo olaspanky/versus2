@@ -71,8 +71,6 @@ export default function Home() {
 
 
   const { data: session } = useSession();
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,7 +82,17 @@ export default function Home() {
       });
 
       if (res.error) {
-        setError("Invalid Credentials");
+        // Check if the error is about already being logged in on another device or tab
+        if (res.error === "You are already logged in on another device or tab.") {
+          // Display an appropriate message to the user
+          setError("you are logged in on another device");
+          showAlert(res.error, "error");
+        } else {
+          // Handle other types of errors
+          setError("Invalid Credentials");
+          showAlert("Invalid Credentials!", "retry");
+        }
+
         return;
       }
 
@@ -92,69 +100,57 @@ export default function Home() {
       const sub = session?.user?.subscription;
 
       Cookies.set("auth_token", user);
+
+      // Handle the user data based on the response
+      if (res.ok) {
+        showAlert("Logged in successfully!", "success");
+        console.log("User data is", user);
+        console.log("Subscription is", sub);
+        router.push("/pbr/home2");
+      } else {
+        setError("Failed to sign in");
+        showAlert("Failed to sign in!", "retry");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      setError("An error occurred while signing in");
+    }
+};
+
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const res = await signIn("credentials", {
+  //       email,
+  //       password,
+  //       redirect: false,
+  //     });
+
+  //     if (res.error) {
+  //       setError("Invalid Credentials");
+  //       return;
+  //     }
+
+  //     const user = session?.user;
+  //     const sub = session?.user?.subscription;
+
+  //     Cookies.set("auth_token", user);
   
 
       
       
-      console.log("User data is", session);
-      console.log("Subscription is", sub);
+  //     console.log("User data is", session);
+  //     console.log("Subscription is", sub);
     
-      router.push("pbr/home2");
-    } catch (error) {
-      console.error("Error signing in:", error);
-    }
-  };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   setSignInText("Signing in...");
-
-  //   const user = new CognitoUser({
-  //     Username: email,
-  //     Pool: UserPool,
-  //   });
-
-  //   const authDetails = new AuthenticationDetails({
-  //     Username: email,
-  //     Password: password,
-  //   });
-
-  //   user.authenticateUser(authDetails, {
-  //     onSuccess: async (data) => {
-  //       setIsLoading(false);
-  //       setSignInText("Sign in");
-  //       dispatch(setUser(user.getSignInUserSession()));
-  //       const userSession = user.getSignInUserSession();
-  //       const idToken = userSession.getIdToken().getJwtToken();
-  //       console.log("token:", idToken);
-  //       const accessToken = userSession.getAccessToken().getJwtToken();
-  //       const company = data.idToken.payload["custom:ATC2"];
-  //       const companyName = data.idToken.payload["custom:company"];
-  //       Cookies.set("userData1", JSON.stringify(company), { expires: 1 });
-  //       Cookies.set("userData2", JSON.stringify(companyName), { expires: 1 });
-  //       Cookies.set("auth_token", idToken, { expires: 1 });
-  //       showAlert("Signed in successfully!", "success");
-  //       await user.signOut({ global: true });
-  //       router.push("/pbr/home2");
-  //     },
-  //     onFailure: (err) => {
-  //       console.error("onFailure:", err);
-  //       setError(err.message || "An error occurred");
-  //       showAlert("Sign in failed. Please check your credentials.", "error");
-
-  //       setIsLoading(false);
-  //       setSignInText("Sign in");
-  //     },
-  //     newPasswordRequired: (data) => {
-  //       //console.log("newPasswordRequired:", data);
-  //       setIsLoading(false);
-  //       showAlert("Sign in failed. New password required.", "error");
-
-  //       setSignInText("Sign in");
-  //     },
-  //   });
+  //     router.push("pbr/home2");
+  //   } catch (error) {
+  //     console.error("Error signing in:", error);
+  //   }
   // };
+
+ 
 
   return (
     <main className="flex max-h-[100vh] flex-col items-center justify-between bg-white  font-custom2">

@@ -12,7 +12,11 @@ const [embeddingContext, setEmbeddingContext] = useState(null);
    const [loading, setLoading] = useState(true);  
   const atc2 = [
   'A10 Drugs used in diabetes',
-  'J05 Antivirals for systemic use',   'C02 Antihypertensives', 'A10 Drugs used in diabetes', 'L01 Anti-neoplastic agents', 'C01 Cardiac therapy']
+  'J05 Antivirals for systemic use',   
+  'C02 Antihypertensives', 
+  'A10 Drugs used in diabetes', 
+  'L01 Anti-neoplastic agents', 
+  'C01 Cardiac therapy']
 
   
 
