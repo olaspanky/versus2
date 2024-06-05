@@ -59,7 +59,6 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -102,23 +101,22 @@ const SignUp = () => {
         }),
       });
   
-      if (!res.ok) {
-        throw new Error(`Failed to register user. Status: ${res.status}, StatusText: ${res.statusText}`);
-      }
-  
       const data = await res.json();
+      console.log('API Response:', data); // Log the response data for debugging
   
-      if (data.success) {
+      if (res.ok && data.success) {
         const form = e.target;
-        form.reset(); // Reset the form
+        
         router.push("/");
       } else {
-        console.log("User registration failed.");
+        setError(data.message || "User registration failed.");
       }
     } catch (error) {
       console.log("Error during registration: ", error.message);
+      setError(error.message);
     }
   };
+  
   
 
   const handleDropdownChange = (selected) => {
