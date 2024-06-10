@@ -1,9 +1,4 @@
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import google from "../../../public/assets/google.png";
-import mi from "../../../public/assets/mi.png";
-import logo from "../../../public/assets/logo.png";
-import UserPool from "../UserPool";
 import { useRouter } from "next/navigation";
 import Dropdown2 from "./Dropdown2";
 import VisibilityIcon from "@mui/icons-material/Visibility";

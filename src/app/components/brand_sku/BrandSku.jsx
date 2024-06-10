@@ -49,7 +49,7 @@ export default function Home() {
         </div>
 
         <div className='flex flex-col gap-5 md:flex-row justify-between items-center my-5'>
-            <div className=''><h1 className='md:text-4xl text-xl font-extrabold '>Brand Analytics - Brand SKU Dashboard</h1></div>
+            <div className=''><h1 className='md:text-4xl text-xl font-extrabold '>Brand Analytics - Brand SKU Dashboard trial</h1></div>
             <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
             <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
           </div>

@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 
 function App() {
-  const [dashboardId, setDashboardId] = useState('1240dba0-0fc0-42fa-a614-5aecaa54e2f0');
+  const [dashboardId, setDashboardId] = useState('cbfca22f-ae73-4acf-afec-28e830839eeb');
   const [dashboardUrl, setDashboardUrl] = useState(null);
   const [embeddingContext, setEmbeddingContext] = useState(null);
  const [loading, setLoading] = useState(true);
