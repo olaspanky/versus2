@@ -245,6 +245,7 @@ export const authOptions = {
           ...token,
           id: user._id,
           subscription: user.subscription,
+          role: user.role,
         };
       }
       return token;
@@ -256,6 +257,7 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           subscription: token.subscription,
+          role: token.role
         },
       };
     },

@@ -42,6 +42,11 @@ const userSchema = new Schema(
       default: null,
 
     },
+    role: {
+      type: String,
+      default: null,
+
+    },
     subscription: {
       type: [String], 
       default: null,
@@ -54,6 +59,10 @@ const userSchema = new Schema(
     isLoggedIn: {
       type: Boolean,
       default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

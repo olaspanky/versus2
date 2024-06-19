@@ -204,15 +204,15 @@ const YourComponent = () => {
       ],
     },
     {
-      title: "Settings",
-      path: "/pbr/settings/", // Corrected path
+      title: "Support",
+      path: "/pbr/setting2/", // Corrected path
 
       links: "sku",
 
       subItems: [
         {
-          title: "Settings",
-          path: "/pbr/settings", // Corrected path
+          title: "Support",
+          path: "/pbr/setting2", // Corrected path
           links: "sku",
         },
       ],

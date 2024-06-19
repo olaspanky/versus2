@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 function App() {
-  const [dashboardId, setDashboardId] = useState('da865c6a-f2e8-4854-947d-8da74ec4abfa');
+  const [dashboardId, setDashboardId] = useState('6ad0615e-8a55-4acd-9ff0-dfb077b55995');
   const [dashboardUrl, setDashboardUrl] = useState(null);
   const [embeddingContext, setEmbeddingContext] = useState(null);
  const [loading, setLoading] = useState(true);

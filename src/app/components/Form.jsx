@@ -51,6 +51,7 @@ const SignUp = () => {
   const [subscription, setSubscription] = useState([]);
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -92,7 +93,8 @@ const SignUp = () => {
           email,
           password,
           subscription,
-          company
+          company,
+          role
         }),
       });
   
@@ -173,6 +175,21 @@ const SignUp = () => {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      required
+                      className="border border-gray-300 w-full rounded-md py-3 px-3 focus:outline-none focus:border-blue-500 "
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label
+                      htmlFor="role"
+                      className="text-gray-700 font-semibold mb-1"
+                    >
+                      Role
+                    </label>
+                    <input
+                      type="text"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
                       required
                       className="border border-gray-300 w-full rounded-md py-3 px-3 focus:outline-none focus:border-blue-500 "
                     />

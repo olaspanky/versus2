@@ -1,124 +1,123 @@
-// import React, { useEffect } from "react";
-// import { DataGrid } from "@mui/x-data-grid";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setAllUserData, setError } from "../store/slice/dataSlice";
-
-// const columns = [
-//   { field: "companyName", headerName: "Company", flex: 2 },
-//   { field: "createdAt", headerName: "Date created", flex: 1.5 },
-//   { field: "password", headerName: "Password", flex: 1, sortable: false },
-//   { field: "subscriptionType", headerName: "Subscription Type", flex: 1 },
-// ];
-
-// export default function DataTable() {
-//   const dispatch = useDispatch();
-//   const { allUserData, error } = useSelector((state) => state.alldata);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch("http://localhost:3000/api/userss");
-
-//         if (response.ok) {
-//           const data = await response.json();
-//           //console.log("All User Data:", data);
-//           dispatch(setAllUserData(data));
-//         } else {
-//           console.error(
-//             "Failed to fetch all user data. Status:",
-//             response.status
-//           );
-//           dispatch(setError("Failed to fetch user data"));
-//         }
-//       } catch (error) {
-//         console.error("Error fetching user data:", error);
-//         dispatch(setError("Error fetching user data"));
-//       }
-//     };
-
-//     fetchData();
-//   }, [dispatch]);
-
-//   // Transform the data to match the expected structure for MUI DataGrid
-//   const transformedData = allUserData.map((user) => ({
-//     id: user._id, // Using _id as the unique identifier
-//     companyName: user.CompanyName,
-//     createdAt: user.createdAt,
-//     password: user.password,
-//     subscriptionType: user.subscription[0], // Assuming you want the first subscription
-//     // Add other fields as needed
-//   }));
-
-//   return (
-//     <div style={{ height: "400px", width: "100%" }}>
-//       <DataGrid
-//         rows={transformedData}
-//         columns={columns}
-//         pageSize={5}
-//         rowsPerPageOptions={[5]}
-//       />
-//     </div>
-//   );
-// }
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllUserData, setError } from "../store/slice/dataSlice";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import UpdatePasswordModal from "../components/UPModal";
+import ConfirmDeactivateModal from "../components/CDModal";
 
 export default function DataTable() {
   const dispatch = useDispatch();
   const { allUserData, error } = useSelector((state) => state.alldata);
+  const [loading, setLoading] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [confirmDeactivateModalOpen, setConfirmDeactivateModalOpen] = useState(false);
 
-  const handleUpdate = async (id) => {
-    // Implement logic to update user with the given id
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/getAllUsers");
+        const result = await response.json();
+        
+        if (result.success) {
+          dispatch(setAllUserData(result.data));
+        } else {
+          dispatch(setError(result.message));
+        }
+      } catch (error) {
+        dispatch(setError("An error occurred while fetching data."));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  const handleMenuClick = (event, user) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedUser(user);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleManageAccess = () => {
+    // Implement manage access logic here
+    handleMenuClose();
+  };
+
+  const handleUpdatePassword = () => {
+    setPasswordModalOpen(true);
+    handleMenuClose();
+  };
+
+  const handlePasswordSave = async (newPassword) => {
     try {
-      const response = await fetch(`https://versusapi-2.onrender.com/api/users/${id}`, {
-        method: "PATCH",
+      const response = await fetch("/api/updatePassword", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ /* update fields */ }),
+        body: JSON.stringify({ userId: selectedUser.id, newPassword }),
       });
-
-      if (response.ok) {
-        // Update the UI or handle success as needed
-        //console.log("User updated successfully");
+      const result = await response.json();
+      if (result.success) {
+        alert("Password updated successfully.");
       } else {
-        console.error("Failed to update user. Status:", response.status);
+        alert("Failed to update password.");
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error("Error updating password:", error);
+      alert("An error occurred while updating the password.");
     }
+    setPasswordModalOpen(false);
+    setSelectedUser(null); // Reset the selected user after saving
   };
 
-  const handleDelete = async (id) => {
+  const handleToggleActivation = () => {
+    setConfirmDeactivateModalOpen(true);
+    handleMenuClose();
+  };
+
+  const handleConfirmDeactivate = async () => {
     try {
-      //console.log("Deleting user with ID:", id);
-      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
-        method: "DELETE",
+      const response = await fetch("/api/toggleActivation", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ userId: selectedUser.id }),
       });
-  
-      //console.log("Response:", response); // Log the response
-      
-      if (response.ok) {
-        //console.log("User deleted successfully");
+      const result = await response.json();
+      if (result.success) {
+        alert("User activation status updated successfully.");
+        dispatch(setAllUserData(result.data)); // update the user data in the state
       } else {
-        console.error("Failed to delete user. Status:", response.status);
+        alert("Failed to update user activation status.");
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error updating user activation status:", error);
+      alert("An error occurred while updating the user activation status.");
     }
+    setConfirmDeactivateModalOpen(false);
+    setSelectedUser(null); // Reset the selected user after updating
   };
-  
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   const columns = [
-    { field: "companyName", headerName: "Company", flex: 2 },
+    { field: "company", headerName: "Company", flex: 2 },
     { field: "createdAt", headerName: "Date created", flex: 1.5 },
     { field: "password", headerName: "Password", flex: 1, sortable: false },
-    { field: "subscriptionType", headerName: "Subscription Type", flex: 1 },
+    { field: "subscription", headerName: "Subscription Type", flex: 1 },
     {
       field: "actions",
       headerName: "Actions",
@@ -126,47 +125,34 @@ export default function DataTable() {
       sortable: false,
       renderCell: (params) => (
         <>
-          <button onClick={() => handleUpdate(params.row.id)}>Update</button>
-          <button onClick={() => handleDelete(params.row.id)}>Delete</button>
+          <IconButton onClick={(event) => handleMenuClick(event, params.row)}>
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl) && selectedUser && selectedUser.id === params.row.id}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={handleManageAccess}>Manage Access</MenuItem>
+            <MenuItem onClick={handleUpdatePassword}>Update Password</MenuItem>
+            <MenuItem onClick={handleToggleActivation}>
+              {params.row.isLoggedIn ? "Deactivate User" : "Activate User"}
+            </MenuItem>
+            <MenuItem>See Last Login</MenuItem>
+          </Menu>
         </>
       ),
     },
   ];
 
-  // Transform the data to match the expected structure for MUI DataGrid
-  const transformedData = allUserData.map((user) => ({
-    id: user._id, // Using _id as the unique identifier
-    companyName: user.CompanyName,
-    createdAt: user.createdAt,
+  const transformedData = allUserData.map(user => ({
+    id: user._id,
+    company: user.company,
+    createdAt: new Date(user.createdAt).toLocaleDateString(),
     password: user.password,
-    subscriptionType: user.subscription[0], // Assuming you want the first subscription
-    // Add other fields as needed
+    subscription: user.subscription,
+    isLoggedIn: user.isLoggedIn,
   }));
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://versusapi-2.onrender.com/api/users");
-
-        if (response.ok) {
-          const data = await response.json();
-          //console.log("All User Data:", data);
-          dispatch(setAllUserData(data));
-        } else {
-          console.error(
-            "Failed to fetch all user data. Status:",
-            response.status
-          );
-          dispatch(setError("Failed to fetch user data"));
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        dispatch(setError("Error fetching user data"));
-      }
-    };
-
-    fetchData();
-  }, [dispatch]);
 
   return (
     <div style={{ height: "400px", width: "100%" }}>
@@ -175,6 +161,17 @@ export default function DataTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+      />
+      <UpdatePasswordModal
+        open={passwordModalOpen}
+        onClose={() => setPasswordModalOpen(false)}
+        onSave={handlePasswordSave}
+      />
+      <ConfirmDeactivateModal
+        open={confirmDeactivateModalOpen}
+        onClose={() => setConfirmDeactivateModalOpen(false)}
+        onConfirm={handleConfirmDeactivate}
+        isActive={selectedUser?.isLoggedIn}
       />
     </div>
   );

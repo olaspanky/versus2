@@ -35,7 +35,8 @@ const Sidebar = ({ title, icon, subItems }) => {
   const { data: session } = useSession();
 
   const subscription = session?.user?.subscription;
-  const email = session?.user?.email;
+  const name = session?.user?.name;
+  const role = session?.user?.role;
   
   const existingCookie = Cookies.get("atc");
   
@@ -143,8 +144,8 @@ const Sidebar = ({ title, icon, subItems }) => {
             <div className="lg:text-sm text-xs ml-1">
               
               
-              <p className="text-gray-400">Managing Director</p>
-              <p className="text-gray-400">{email}</p>
+              <p className="text-gray-400">{role}</p>
+              <p className="text-gray-400">{name}</p>
             </div>
           </div>
         </div>
