@@ -5,6 +5,7 @@ import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
 import UserPool from './UserPool';
 
+
 Amplify.configure({ ...awsExports, ssr: true });
 
 
@@ -23,14 +24,18 @@ export const metadata = {
   description: 'Pbr Life Sciences',
 }
 
+
+
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body className={sans.className}>
 
       <Providers>
-        {children}
+      {children}
         </Providers>
+        
         </body>
     </html>
   )

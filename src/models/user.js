@@ -64,6 +64,14 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    loginTimestamp: { type: Date },
+    logoutTimestamp: { type: Date },
+    sessionDuration: { type: Number, default: 0 }, // in milliseconds
+    weekStartTimestamp: { type: Date }, // timestamp to track week start
+    lastActivity: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );

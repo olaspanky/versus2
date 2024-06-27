@@ -215,6 +215,11 @@ const YourComponent = () => {
           path: "/pbr/setting2", // Corrected path
           links: "sku",
         },
+        {
+          title: "Admin",
+          path: "/pbr/settings", // Corrected path
+          links: "sku",
+        },
       ],
     },
   ];

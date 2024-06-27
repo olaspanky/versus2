@@ -116,7 +116,7 @@ export default function DataTable() {
   const columns = [
     { field: "company", headerName: "Company", flex: 2 },
     { field: "createdAt", headerName: "Date created", flex: 1.5 },
-    { field: "password", headerName: "Password", flex: 1, sortable: false },
+    { field: "loginTimestamp", headerName: "Last Login", flex: 1 },
     { field: "subscription", headerName: "Subscription Type", flex: 1 },
     {
       field: "actions",
@@ -149,13 +149,14 @@ export default function DataTable() {
     id: user._id,
     company: user.company,
     createdAt: new Date(user.createdAt).toLocaleDateString(),
+    loginTimestamp: new Date(user.loginTimestamp).toLocaleDateString(),
     password: user.password,
     subscription: user.subscription,
     isLoggedIn: user.isLoggedIn,
   }));
 
   return (
-    <div style={{ height: "400px", width: "100%" }}>
+    <div style={{ height: "60vh", width: "100%" }}>
       <DataGrid
         rows={transformedData}
         columns={columns}

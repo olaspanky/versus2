@@ -15,7 +15,7 @@ const Home = () => {
 
   const handlePasswordSubmit = (password) => {
     // Check if the entered password is correct
-    if (password === '1234') { // Change to your desired password
+    if (password === 'PbrAdmin2024') { 
       setAuthenticated(true);
     } else {
       alert('Incorrect password');
