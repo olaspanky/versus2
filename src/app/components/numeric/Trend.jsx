@@ -5,6 +5,8 @@ import { selectUserData } from '../../store/slice/userdataslice';
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
+
 
 function App() {
   const [dashboardId, setDashboardId] = useState('88363ae0-2fcc-4970-a139-c4e65b28bb1a');
@@ -12,15 +14,15 @@ function App() {
   const [embeddingContext, setEmbeddingContext] = useState(null);
  const [loading, setLoading] = useState(true);
   const router = useRouter() 
+  const { data: session } = useSession();
+
+  const subscription = session?.user?.subscription;
+
   
 
      useEffect(() => {
-    const userDataFromCookie = Cookies.get("atc");
-    const userData = JSON.parse(userDataFromCookie);
+      const atc2 = subscription;
 
-   
-    const atc2 = userData;
-    console.log(atc2); // This will output the array
 
   
 

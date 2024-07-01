@@ -12,6 +12,8 @@ const withAuth = (WrappedComponent) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log("session is", session)
+
     useEffect(() => {
       const checkAuth = async () => {
         try {

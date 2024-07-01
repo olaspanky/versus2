@@ -1,14 +1,19 @@
-// components/UpdatePasswordForm.js
-
 import { useState } from 'react';
 
 const UpdatePasswordForm = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      setMessage('Passwords do not match.');
+      return;
+    }
 
     try {
       const response = await fetch('/api/updatePasswordByEmail', {
@@ -33,8 +38,8 @@ const UpdatePasswordForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Update Password</h2>
+    <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center">End Previous Session and Re-login</h2>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
         <input
@@ -45,21 +50,45 @@ const UpdatePasswordForm = () => {
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-4 relative">
         <label className="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
         <input
-          type="password"
+          type={passwordVisible ? 'text' : 'password'}
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
         />
+        <button
+          type="button"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+          onClick={() => setPasswordVisible(!passwordVisible)}
+        >
+          {passwordVisible ? 'Hide' : 'Show'}
+        </button>
+      </div>
+      <div className="mb-6 relative">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password:</label>
+        <input
+          type={passwordVisible ? 'text' : 'password'}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+        />
+        <button
+          type="button"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+          onClick={() => setPasswordVisible(!passwordVisible)}
+        >
+          {passwordVisible ? 'Hide' : 'Show'}
+        </button>
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+        className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
       >
-        Update Password
+        Update
       </button>
       {message && <p className="mt-4 text-center text-sm text-green-500">{message}</p>}
     </form>

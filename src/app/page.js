@@ -509,12 +509,11 @@ export default function Home() {
                       <div className="flex items-center">
                         <input type="checkbox" id="remember" className="mr-2" />
                         <label htmlFor="remember" className="text-sm text-gray-700">
-                          Remember me
                         </label>
                       </div>
                       <div>
                         <p className="text-sm text-gray-700 cursor-pointer" onClick={handleForgotPasswordClick}>
-                          Forgotten Password
+                        End previous Session
                         </p>
                       </div>
                     </div>

@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { selectUserData, setUserData } from '../store/slice/userdataslice';
 import Cookies from 'js-cookie';
 import { useSession } from "next-auth/react";
+import { getGeolocation } from "../utilities/getGeolocation";
 
 
 
@@ -37,6 +38,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   const subscription = session?.user?.subscription;
   const name = session?.user?.name;
   const role = session?.user?.role;
+  const location = session?.user?.location;
   
   const existingCookie = Cookies.get("atc");
   
@@ -52,6 +54,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   console.log("User data is", session);
   console.log("Subscription is", subscription);
   console.log("already exists is", existingCookie);
+  console.log("location is ", location);
 
 
 

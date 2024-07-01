@@ -1,23 +1,19 @@
 
-
-
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { getGeolocation } from "../../../utilities/getGeolocation";
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-
-
-     
-
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         const { email, password } = credentials;
+        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
         try {
           await connectMongoDB();
@@ -28,28 +24,40 @@ export const authOptions = {
           }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          await User.updateOne({ email }, { lastActivity: new Date() });
-
 
           if (!passwordsMatch) {
             return null;
           }
 
+          const now = new Date();
+          const locationData = await getGeolocation(ip);
+
           // Check if user is already logged in
-          if (user.isLoggedIn && !passwordsMatch) {
-            throw new Error("You are already logged in on another device or tab.");
-          }
           if (user.isLoggedIn) {
             return null;
           }
 
-          const now = new Date();
-
           // Check if it's a new week
           if (!user.weekStartTimestamp || now - new Date(user.weekStartTimestamp) >= 7 * 24 * 60 * 60 * 1000) {
-            await User.updateOne({ email }, { isLoggedIn: true, loginTimestamp: now, weekStartTimestamp: now, sessionDuration: 0 });
+            await User.updateOne(
+              { email },
+              {
+                isLoggedIn: true,
+                loginTimestamp: now,
+                weekStartTimestamp: now,
+                sessionDuration: 0,
+                loginLocation: locationData,
+              }
+            );
           } else {
-            await User.updateOne({ email }, { isLoggedIn: true, loginTimestamp: now });
+            await User.updateOne(
+              { email },
+              {
+                isLoggedIn: true,
+                loginTimestamp: now,
+                loginLocation: locationData,
+              }
+            );
           }
 
           return user;
@@ -60,7 +68,6 @@ export const authOptions = {
       },
     }),
   ],
-  
   callbacks: {
     async jwt({ token, user }) {
       console.log("jwt callback:", { token, user });
@@ -71,6 +78,7 @@ export const authOptions = {
           id: user._id,
           subscription: user.subscription,
           role: user.role,
+          location: user.loginLocation
         };
       }
       return token;
@@ -82,7 +90,9 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           subscription: token.subscription,
-          role: token.role
+          role: token.role,
+          location: token.loginLocation
+
         },
       };
     },
@@ -103,12 +113,10 @@ export const authOptions = {
       }
     },
   },
-  
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
-  
   pages: {
     signIn: "/",
   },
