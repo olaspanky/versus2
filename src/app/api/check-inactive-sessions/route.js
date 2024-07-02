@@ -3,6 +3,10 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
   try {
     await connectMongoDB();
     const users = await User.find({ isLoggedIn: true });
