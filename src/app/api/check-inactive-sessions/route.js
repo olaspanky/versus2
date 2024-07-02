@@ -1,7 +1,7 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 
-export  async function POST(req) {
+export  async function POST(res) {
  
   try {
     await connectMongoDB();
