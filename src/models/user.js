@@ -1,6 +1,6 @@
-import mongoose, { Schema, models } from "mongoose";
+import mongoose from "mongoose";
 
-const previousPasswordSchema = new Schema({
+const previousPasswordSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
@@ -11,12 +11,24 @@ const previousPasswordSchema = new Schema({
   },
 });
 
-const locationSchema = new Schema({
+const locationSchema = new mongoose.Schema({
   country: String,
   state: String,
 });
 
-const userSchema = new Schema(
+const sessionDurationSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now,
+    index: true,
+  },
+  duration: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -42,10 +54,6 @@ const userSchema = new Schema(
       type: [String],
       default: null,
     },
-    fingerprint: {
-      type: String,
-      default: null,
-    },
     isLoggedIn: {
       type: Boolean,
       default: false,
@@ -58,16 +66,6 @@ const userSchema = new Schema(
     loginTimestamp: {
       type: Date,
     },
-    logoutTimestamp: {
-      type: Date,
-    },
-    sessionDuration: {
-      type: Number,
-      default: 0, // in milliseconds
-    },
-    weekStartTimestamp: {
-      type: Date, // timestamp to track week start
-    },
     previousPasswords: {
       type: [previousPasswordSchema],
       default: [],
@@ -76,9 +74,13 @@ const userSchema = new Schema(
       type: locationSchema,
       default: null,
     },
+    sessionDuration: {
+      type: [sessionDurationSchema],
+      default: [],
+    },
   },
   { timestamps: true }
 );
 
-const User = models.User || mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;

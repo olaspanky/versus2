@@ -53,47 +53,40 @@ const UpdatePasswordForm = () => {
       <div className="mb-4 relative">
         <label className="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
         <div className='flex justify-between w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500'>
-        <input
-          type={passwordVisible ? 'text' : 'password'}
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-          className=""
-        />
-        <button
-          type="button"
-          className=" pr-3 flex items-center  justify-center text-center  text-sm leading-5 "
-          onClick={() => setPasswordVisible(!passwordVisible)}
-        >
-          {passwordVisible ? 'Hide' : 'Show'}
-        </button>
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            required
+            className=""
+          />
+          <button
+            type="button"
+            className=" pr-3 flex items-center justify-center text-center text-sm leading-5"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? 'Hide' : 'Show'}
+          </button>
         </div>
-
-
       </div>
       <div className="mb-6 relative">
         <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password:</label>
-        <div className="mb-4 relative">
-        <label className="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
         <div className='flex justify-between w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500'>
-        <input
-          type={passwordVisible ? 'text' : 'password'}
-          value={newPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          className=""
-        />
-        <button
-          type="button"
-          className=" pr-3 flex items-center  justify-center text-center  text-sm leading-5 "
-          onClick={() => setPasswordVisible(!passwordVisible)}
-        >
-          {passwordVisible ? 'Hide' : 'Show'}
-        </button>
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className=""
+          />
+          <button
+            type="button"
+            className=" pr-3 flex items-center justify-center text-center text-sm leading-5"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? 'Hide' : 'Show'}
+          </button>
         </div>
-
-
-      </div>
       </div>
       <button
         type="submit"

@@ -87,7 +87,7 @@ const Sidebar = ({ title, icon, subItems }) => {
     }
   };
 
-  useAutoSignOut(handleSignOut, 100000); // 300000 ms = 5 minutes
+  useAutoSignOut(handleSignOut, 300000); // 300000 ms = 5 minutes
   localStorage.setItem('isReloaded', true);
 
 

@@ -3,7 +3,7 @@ import { signOut } from 'aws-amplify/auth';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
-const useAutoSignOut = (signOutHandler, timeout = 100000) => { // 300000 ms = 5 minutes
+const useAutoSignOut = (signOutHandler, timeout = 300000) => { // 300000 ms = 5 minutes
   const router = useRouter();
   const timer = useRef(null);
 
@@ -15,7 +15,7 @@ const useAutoSignOut = (signOutHandler, timeout = 100000) => { // 300000 ms = 5 
   };
 
   useEffect(() => {
-    const events = ['mousemove', 'keydown', 'click', 'touchstart'];
+    const events = ['mousemove'];
 
     const handleActivity = () => {
       resetTimer();

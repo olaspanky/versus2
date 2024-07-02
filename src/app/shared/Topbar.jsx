@@ -34,21 +34,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   
   //console.log("company is:", companyName)
   const { data: session } = useSession();
-  useEffect(() => {
-    if (session?.user?.email) {
-      const updateActivity = async () => {
-        await fetch('/api/update-activity', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: session.user.email })
-        });
-      };
-
-      const intervalId = setInterval(updateActivity, 5 * 60 * 1000); // every 5 minutes
-
-      return () => clearInterval(intervalId);
-    }
-  }, [session?.user?.email]);
+  
 
   const subscription = session?.user?.subscription;
   const name = session?.user?.name;
