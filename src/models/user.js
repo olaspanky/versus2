@@ -54,6 +54,7 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    lastActivityTimestamp: { type: Date },
     loginTimestamp: {
       type: Date,
     },

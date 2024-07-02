@@ -52,37 +52,48 @@ const UpdatePasswordForm = () => {
       </div>
       <div className="mb-4 relative">
         <label className="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
+        <div className='flex justify-between w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500'>
         <input
           type={passwordVisible ? 'text' : 'password'}
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          className=""
         />
         <button
           type="button"
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+          className=" pr-3 flex items-center  justify-center text-center  text-sm leading-5 "
           onClick={() => setPasswordVisible(!passwordVisible)}
         >
           {passwordVisible ? 'Hide' : 'Show'}
         </button>
+        </div>
+
+
       </div>
       <div className="mb-6 relative">
         <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password:</label>
+        <div className="mb-4 relative">
+        <label className="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
+        <div className='flex justify-between w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500'>
         <input
           type={passwordVisible ? 'text' : 'password'}
-          value={confirmPassword}
+          value={newPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          className=""
         />
         <button
           type="button"
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+          className=" pr-3 flex items-center  justify-center text-center  text-sm leading-5 "
           onClick={() => setPasswordVisible(!passwordVisible)}
         >
           {passwordVisible ? 'Hide' : 'Show'}
         </button>
+        </div>
+
+
+      </div>
       </div>
       <button
         type="submit"
