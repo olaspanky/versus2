@@ -1,6 +1,3 @@
-
-
-
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import NextAuth from "next-auth/next";
@@ -12,10 +9,6 @@ export const authOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-
-
-     
-
       async authorize(credentials) {
         const { email, password } = credentials;
 
@@ -28,29 +21,16 @@ export const authOptions = {
           }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          await User.updateOne({ email }, { lastActivity: new Date() });
-
 
           if (!passwordsMatch) {
             return null;
           }
 
-          // Check if user is already logged in
-          if (user.isLoggedIn && !passwordsMatch) {
+          if (user.isLoggedIn) {
             throw new Error("You are already logged in on another device or tab.");
           }
-          if (user.isLoggedIn) {
-            return null;
-          }
 
-          const now = new Date();
-
-          // Check if it's a new week
-          if (!user.weekStartTimestamp || now - new Date(user.weekStartTimestamp) >= 7 * 24 * 60 * 60 * 1000) {
-            await User.updateOne({ email }, { isLoggedIn: true, loginTimestamp: now, weekStartTimestamp: now, sessionDuration: 1 });
-          } else {
-            await User.updateOne({ email }, { isLoggedIn: true, loginTimestamp: now });
-          }
+          await User.updateOne({ email }, { isLoggedIn: true });
 
           return user;
         } catch (error) {
@@ -60,11 +40,8 @@ export const authOptions = {
       },
     }),
   ],
-  
   callbacks: {
     async jwt({ token, user }) {
-      console.log("jwt callback:", { token, user });
-
       if (user) {
         return {
           ...token,
@@ -82,33 +59,23 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           subscription: token.subscription,
-          role: token.role
+          role: token.role,
         },
       };
     },
     async signOut({ token }) {
       try {
-        const response = await fetch("/api/update-isloggedin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: token.email }),
-        });
-        if (!response.ok) {
-          throw new Error("Failed to update logout timestamp.");
-        }
+        await connectMongoDB();
+        await User.updateOne({ email: token.email }, { isLoggedIn: false });
       } catch (error) {
         console.error("Error logging out: ", error);
       }
     },
   },
-  
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
-  
   pages: {
     signIn: "/",
   },
