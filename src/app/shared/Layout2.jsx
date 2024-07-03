@@ -101,7 +101,7 @@ const Layout2 = ({ children }) => {
     };
 
     // Update accumulated time every 5 minutes
-    const timeUpdateInterval = setInterval(updateAccumulatedTime, 5 * 60 * 1000);
+    const timeUpdateInterval = setInterval(updateAccumulatedTime, 1000);
 
     // Sync with database every 15 minutes
     const syncWithDatabase = async () => {
