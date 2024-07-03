@@ -73,6 +73,11 @@ const Sidebar = ({ title, icon, subItems }) => {
         navigator.sendBeacon('/api/update-isloggedin', JSON.stringify({ email, isLoggedIn: false }));
       }
 
+      // Clear deviceId from localStorage
+      if (typeof window !== "undefined") {
+        localStorage.removeItem('deviceId');
+      }
+
       // Clear cookies
       Cookies.remove('atc');
       Cookies.remove('auth_token');

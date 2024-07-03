@@ -78,6 +78,12 @@ const userSchema = new mongoose.Schema(
       type: [sessionDurationSchema],
       default: [],
     },
+    deviceId: {
+      type: String,
+      default: null,
+    },  // Add this field
+    sessionUUID: { type: String, default: null },
+
   },
   { timestamps: true }
 );

@@ -6,7 +6,7 @@ import awsconfig from '../aws-exports';
 import '@aws-amplify/ui-react/styles.css';
 import withAuth from '../utilities/withAuth';
 import TimeMe from 'timeme.js';
-import { useSession } from 'next-auth/react';
+
 Amplify.configure(awsconfig);
 
 const Layout2 = ({ children }) => {
@@ -76,7 +76,6 @@ const Layout2 = ({ children }) => {
   //   };
   // }, [accumulatedTime]);
   const [accumulatedTime, setAccumulatedTime] = useState(0);
-  const { data: session } = useSession();
 
   useEffect(() => {
     // Initialize TimeMe.js
@@ -101,7 +100,7 @@ const Layout2 = ({ children }) => {
     };
 
     // Update accumulated time every 5 minutes
-    const timeUpdateInterval = setInterval(updateAccumulatedTime, 1000);
+    const timeUpdateInterval = setInterval(updateAccumulatedTime, 5 * 60 * 1000);
 
     // Sync with database every 15 minutes
     const syncWithDatabase = async () => {
@@ -110,7 +109,7 @@ const Layout2 = ({ children }) => {
 
       if (newAccumulatedTime > 0) {
         // Get user email from session (replace this with actual method to get email)
-        const email = session?.user?.email;
+        const email = "user@example.com"; // Replace with actual user's email
 
         // Send accumulated time to backend
         try {

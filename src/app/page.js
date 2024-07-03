@@ -332,6 +332,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useAutoSignOut from './components/useAutoSignOut';
 import PasswordModal from "./components/PasswordModal"; // Import the PasswordModal component
+import { getDeviceIdentifier } from './components/getDeviceIdentifier';
+
 
 const CustomAlert = ({ message, type }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -347,22 +349,7 @@ const CustomAlert = ({ message, type }) => {
     }
   }, [message]);
 
-  const handleSignOut = async () => {
-    try {
-      const email = session?.user?.email;
-      if (email) {
-        navigator.sendBeacon('/api/update-isloggedin', JSON.stringify({ email, isLoggedIn: false }));
-      }
-      Cookies.remove('atc');
-      Cookies.remove('auth_token');
-      await signOut({ redirect: false, callbackUrl: '/' });
-      router.push('/');
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
-
-  useAutoSignOut(handleSignOut, 100000);
+ 
 
   const alertClass = type === "success" ? "text-primary text-xl" : "text-red-500";
 
@@ -385,6 +372,8 @@ export default function Home() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // State to handle modal visibility
+  const [deviceId, setDeviceId] = useState(null);
+
 
   const showAlert = (message, type) => {
     setAlertMessage(message);
@@ -397,42 +386,63 @@ export default function Home() {
 
   const { data: session } = useSession();
 
+  // useEffect(() => {
+  //   const id = getDeviceIdentifier();
+  //   setDeviceId(id);
+  //   console.log("Device ID set to", id);
+  // }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const deviceId = getDeviceIdentifier();
+    console.log("deviceid is", deviceId);
+
+    if (!deviceId) {
+      showAlert("Unable to identify device.", "error");
+      return;
+    }
+    console.log("deviceid is", deviceId);
+
+   
+
+    setIsLoading(true);
+    setSignInText("Signing in...");
 
     try {
       const res = await signIn("credentials", {
         email,
         password,
         redirect: false,
+        deviceId
       });
 
       if (res.error) {
-        if (res.error === "You are already logged in on another device or tab.") {
-          setError("You are logged in on another device");
+        if (res.error === "You are already logged in on another device.") {
+          setError("You are logged in on another device.");
           showAlert(res.error, "error");
         } else {
           setError("Invalid Credentials");
-          showAlert("Invalid Credentials!", "retry");
+          showAlert("Invalid Credentials!", "error");
         }
+        setIsLoading(false);
+        setSignInText("Sign in");
         return;
       }
-
-      const user = session?.user;
-      const sub = session?.user?.subscription;
-
-      Cookies.set("auth_token", user);
 
       if (res.ok) {
         showAlert("Logged in successfully!", "success");
         router.push("/pbr/home2");
       } else {
         setError("Failed to sign in");
-        showAlert("Failed to sign in!", "retry");
+        showAlert("Failed to sign in!", "error");
       }
     } catch (error) {
       console.error("Error signing in:", error);
       setError("An error occurred while signing in");
+      showAlert("An error occurred while signing in!", "error");
+    } finally {
+      setIsLoading(false);
+      setSignInText("Sign in");
     }
   };
 
