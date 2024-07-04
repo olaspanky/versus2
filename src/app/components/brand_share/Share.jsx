@@ -4,7 +4,9 @@ import Loading from '../Loading';
 import { selectUserData } from '../../store/slice/userdataslice';
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
+
 
 function App() {
   const [dashboardId, setDashboardId] = useState('baaf2d06-9fd0-4752-bb1a-11f192f0e7a6');
@@ -16,10 +18,9 @@ function App() {
   const subscription = session?.user?.subscription;
   
 
-     useEffect(() => {
-      
-      const atc2 = subscription;
-      console.log(atc2); // This will output the array
+      useEffect(() => {
+        const atc2 = subscription;
+
 
   
 

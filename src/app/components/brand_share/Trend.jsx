@@ -18,10 +18,9 @@ function App() {
   const subscription = session?.user?.subscription;
   
 
-     useEffect(() => {
-    
-      const atc2 = subscription;
-      console.log(atc2); // This will output the array
+      useEffect(() => {
+        const atc2 = subscription;
+
 
   
 
