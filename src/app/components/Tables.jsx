@@ -115,8 +115,9 @@ export default function DataTable() {
 
   const columns = [
     { field: "company", headerName: "Company", flex: 2 },
-    { field: "createdAt", headerName: "Date created", flex: 1.5 },
+    { field: "createdAt", headerName: "Date created", flex: 1 },
     { field: "loginTimestamp", headerName: "Last Login", flex: 1 },
+    { field: "sessionDuration", headerName: "User Average time (hrs)", flex: 1 },
     { field: "subscription", headerName: "Subscription Type", flex: 1 },
     {
       field: "actions",
@@ -153,6 +154,7 @@ export default function DataTable() {
     password: user.password,
     subscription: user.subscription,
     isLoggedIn: user.isLoggedIn,
+    sessionDuration: (user.sessionDuration / 3600).toFixed(2) // Convert to minutes and round to 2 decimal places
   }));
 
   return (
