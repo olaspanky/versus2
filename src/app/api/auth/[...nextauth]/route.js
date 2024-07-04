@@ -132,7 +132,7 @@ export const authOptions = {
 
           // Check if user is already logged in on another device
           if (user.isLoggedIn) {
-            throw new Error(`You are already logged in on a ${user.deviceName} ${user.deviceDevice} ${user.browserName} browser  please logout from it to continue.`);
+            throw new Error(`You are already logged in on a ${user.deviceName} ${user.deviceDevice} ${user.browserName} browser.  Please logout from it to continue.`);
           }
 
           await User.updateOne(
