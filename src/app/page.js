@@ -71,6 +71,10 @@ export default function Home() {
   };
 
   const { data: session } = useSession();
+  if(session && session.user){
+    const email = session?.user?.email;
+  }
+
 
   // useEffect(() => {
   //   const id = getDeviceIdentifier();
@@ -171,65 +175,69 @@ export default function Home() {
               </h1>
             </div>
             <form onSubmit={handleSubmit}>
-              <section className="my-9 flex flex-col gap-9 lg:w-[90%]">
-                <div className="flex flex-col gap-5">
-                  <div className="flex flex-col">
-                    <label htmlFor="email" className="text-gray-700 font-semibold mb-1">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="border border-gray-300 w-full rounded-md py-3 px-3 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  <div className="flex flex-col p-1">
-                    <label htmlFor="password" className="text-gray-700 font-semibold mb-1">
-                      Password
-                    </label>
-                    <div className="flex flex-row border justify-between border-gray-300 p-1 rounded-md">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full outline-none p-2"
-                      />
-                      <button
-                        type="button"
-                        className="focus:outline-none mx-2"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                      </button>
-                    </div>
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center">
-                        <input type="checkbox" id="remember" className="mr-2" />
-                        <label htmlFor="remember" className="text-sm text-gray-700">
-                          Remember me
-                        </label>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-700 cursor-pointer" onClick={handleForgotPasswordClick}>
-                          Forgotten Password
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <section className="flex flex-col my-9 w-full gap-5">
+              <section className="my-9 flex flex-col gap-9 w-full">
+              
                   
 
                   {session && session.user ? (
-                    <Link href="/pbr/home2">
+                    <div>
+  <Link href="/pbr/home2">
                       <button className="bg-primary py-3 w-full text-white px-3 rounded-md text-center">
-                        Go to Home
-                      </button>
+Continue to VERSUS&#8482;                      </button>
                     </Link>
+                    </div>
+                  
                   ) : (
+                    <section className="my-9 flex flex-col gap-9 lg:w-[90%]">
+
+                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col">
+                      <label htmlFor="email" className="text-gray-700 font-semibold mb-1">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="border border-gray-300 w-full rounded-md py-3 px-3 focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+                    <div className="flex flex-col p-1">
+                      <label htmlFor="password" className="text-gray-700 font-semibold mb-1">
+                        Password
+                      </label>
+                      <div className="flex flex-row border justify-between border-gray-300 p-1 rounded-md">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          className="w-full outline-none p-2"
+                        />
+                        <button
+                          type="button"
+                          className="focus:outline-none mx-2"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center">
+                          <input type="checkbox" id="remember" className="mr-2" />
+                          <label htmlFor="remember" className="text-sm text-gray-700">
+                            Remember me
+                          </label>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-700 cursor-pointer" onClick={handleForgotPasswordClick}>
+                            Forgotten Password
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     <button
                     className="bg-primary py-3 text-white px-3 rounded-md"
                     onClick={handleSubmit}
@@ -243,13 +251,12 @@ export default function Home() {
                       signInText
                     )}
                   </button>
-                  )}
+                  </section>)}
                                     {error && <p className="error text-red-600 text-sm ">{error}</p>}
 
                   <div>
                     <p>Don't have an account yet? Contact us</p>
                   </div>
-                </section>
                 <div className="md:flex gap-3 justify-between"></div>
               </section>
             </form>
