@@ -53,7 +53,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   
     const fetchData = async (userId) => {
       try {
-        const response = await fetch(`localhost:3000/api/users/${userId}`);
+        const response = await fetch(`/api/users/${userId}`);
   
         if (response.ok) {
           const data = await response.json();

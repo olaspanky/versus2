@@ -174,7 +174,7 @@ const Layout2 = ({ children }) => {
 
         // Send accumulated time to backend
         try {
-          const response = await fetch('http://localhost:3000/api/updateSession', {
+          const response = await fetch('/api/updateSession', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
