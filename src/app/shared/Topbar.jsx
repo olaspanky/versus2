@@ -68,16 +68,30 @@ const Sidebar = ({ title, icon, subItems }) => {
 
   const router = useRouter();
 
-  const handleLogout = () => {
-    const currentUser = UserPool.getCurrentUser();
+  const handleSignOut = async () => {
+    try {
+      // Use navigator.sendBeacon to ensure sign out request is sent
+      const email = session?.user?.email;
+      if (email) {
+        navigator.sendBeacon('/api/update-isloggedin', JSON.stringify({ email, isLoggedIn: false }));
+      }
 
-    if (currentUser) {
-      currentUser.signOut();
-      dispatch(clearUser());
-      //console.log("User logged out successfully");
-      router.push("/");
-    } else {
-      //console.log("No user to log out");
+      // Clear deviceId from localStorage
+      if (typeof window !== "undefined") {
+        localStorage.removeItem('deviceId');
+      }
+
+      // Clear cookies
+      Cookies.remove('atc');
+      Cookies.remove('auth_token');
+
+      // Sign out the user from AWS Amplify
+      await signOut({ redirect: false, callbackUrl: '/' });
+
+      // Redirect to home page
+      router.push('/');
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
   };
 
@@ -208,7 +222,7 @@ const Sidebar = ({ title, icon, subItems }) => {
               </div>
 
               <div className="flex flex-col justify-center items-center ">
-                <div
+                {/* <div
                   className="relative m-2 flex items-center gap-2 rounded-xl  py-3  text-sm text-white "
                   onClick={handleLogout}
                 >
@@ -216,7 +230,16 @@ const Sidebar = ({ title, icon, subItems }) => {
                   <h1 className="text-lg text-white opacity-50 font-semibold">
                     Logout
                   </h1>
-                </div>
+                </div> */}
+                  <button
+              className="flex items-center gap-2 rounded-xl  py-3 pl-5 text-sm text-white"
+              onClick={handleSignOut}
+            >
+              <Image alt="alt" src={logout} />
+              <h1 className="text-lg text-white opacity-50 font-semibold">
+                Logout
+              </h1>
+            </button>
               </div>
 
               <div className="">

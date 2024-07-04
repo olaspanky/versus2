@@ -22,7 +22,6 @@ const Sidebar = ({ title, icon, subItems }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentRoute = usePathname();
-  const user = useSelector((state) => state.user);
   const { data: session } = useSession();
 
 

@@ -16,17 +16,7 @@ const locationSchema = new mongoose.Schema({
   state: String,
 });
 
-const sessionDurationSchema = new mongoose.Schema({
-  date: {
-    type: Date,
-    default: Date.now,
-    index: true,
-  },
-  duration: {
-    type: Number,
-    default: 0,
-  },
-});
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -75,14 +65,17 @@ const userSchema = new mongoose.Schema(
       default: null,
     },
     sessionDuration: {
-      type: [sessionDurationSchema],
-      default: [],
+      type: Number,
+      default: null,
     },
     deviceId: {
       type: String,
       default: null,
     },  // Add this field
     sessionUUID: { type: String, default: null },
+    browserName: { type: String, required: false },
+    deviceName: { type: String, required: false },
+  deviceDevice: { type: String, required: false }
 
   },
   { timestamps: true }
