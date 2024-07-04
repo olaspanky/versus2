@@ -221,7 +221,16 @@ export default function Home() {
                   </div>
                 </div>
                 <section className="flex flex-col my-9 w-full gap-5">
-                  <button
+                  
+
+                  {session && session.user ? (
+                    <Link href="/pbr/home2">
+                      <button className="bg-primary py-3 w-full text-white px-3 rounded-md text-center">
+                        Go to Home
+                      </button>
+                    </Link>
+                  ) : (
+                    <button
                     className="bg-primary py-3 text-white px-3 rounded-md"
                     onClick={handleSubmit}
                     disabled={isLoading}
@@ -234,15 +243,9 @@ export default function Home() {
                       signInText
                     )}
                   </button>
-                  {error && <p className="error text-red-600 text-sm ">{error}</p>}
+                  )}
+                                    {error && <p className="error text-red-600 text-sm ">{error}</p>}
 
-                  {session && session.user ? (
-                    <Link href="/pbr/home2">
-                      <button className="bg-primary py-3 w-full text-white px-3 rounded-md text-center">
-                        Go to Home
-                      </button>
-                    </Link>
-                  ) : null}
                   <div>
                     <p>Don't have an account yet? Contact us</p>
                   </div>
