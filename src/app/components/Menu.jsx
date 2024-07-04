@@ -147,22 +147,22 @@ const YourComponent = () => {
         // },
       ],
     },
-    {
-      title: "Brand Analytics",
-      path: "/pbr/brand/brand_share",
+    // {
+    //   title: "Brand Analytics",
+    //   path: "/pbr/brand/brand_share",
 
-      subItems: [
-        {
-          title: "Brand Share Analytics",
-          path: "/pbr/brand/brand_share",
-          links: "sku",
-        },
-        {
-          title: "Brand SKU",
-          path: "/pbr/brand/brand_sku",
+    //   subItems: [
+    //     {
+    //       title: "Brand Share Analytics",
+    //       path: "/pbr/brand/brand_share",
+    //       links: "sku",
+    //     },
+    //     {
+    //       title: "Brand SKU",
+    //       path: "/pbr/brand/brand_sku",
 
-          links: "sku",
-        },
+    //       links: "sku",
+    //     },
         // {
         //   title: "Competitive Analysis",
         //   path: "/pbr/brand/competitive",
@@ -181,8 +181,8 @@ const YourComponent = () => {
 
         //   links: "sku",
         // },
-      ],
-    },
+    //   ],
+    // },
     {
       title: "Channel Analytics",
       path: "/pbr/channel/numeric",

@@ -64,6 +64,8 @@ export async function PUT(req, res) {
     user.previousPasswords.push({ password: user.password });
     user.password = hashedPassword;
     await user.save();
+    await User.findByIdAndUpdate(user._id, { isLoggedIn: false });
+
 
     return new Response(JSON.stringify({ success: true, message: 'Password updated and user logged out.' }), { status: 200 });
   } catch (error) {
