@@ -195,7 +195,7 @@ const Layout2 = ({ children }) => {
       }
     };
 
-    const databaseSyncInterval = setInterval(syncWithDatabase, 48000);
+    const databaseSyncInterval = setInterval(syncWithDatabase, 24000);
 
     // Pause/Resume timer based on visibility
     const handleVisibilityChange = () => {
