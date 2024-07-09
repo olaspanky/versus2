@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UpdatePasswordModal from "../components/UPModal";
 import ConfirmDeactivateModal from "../components/CDModal";
+import SessionGraphModal from "../components/SessionGraphModal";
 
 export default function DataTable() {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export default function DataTable() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [confirmDeactivateModalOpen, setConfirmDeactivateModalOpen] = useState(false);
+  const [sessionGraphModalOpen, setSessionGraphModalOpen] = useState(false);
+  const [dailySessions, setDailySessions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -110,6 +113,19 @@ export default function DataTable() {
     setSelectedUser(null); // Reset the selected user after updating
   };
 
+  const handleRowClick = (params) => {
+    console.log('Row clicked:', params.row); // Log the clicked row data
+    const user = params.row;
+    setSelectedUser(user);
+    if (user.dailySessions && user.dailySessions.length > 0) {
+      console.log('Daily sessions:', user.dailySessions); // Log the daily sessions data
+      setDailySessions(user.dailySessions);
+      setSessionGraphModalOpen(true);
+    } else {
+      console.log('No daily sessions found for this user.');
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -139,7 +155,7 @@ export default function DataTable() {
             <MenuItem onClick={handleToggleActivation}>
               {params.row.isLoggedIn ? "Deactivate User" : "Activate User"}
             </MenuItem>
-            <MenuItem>See Last Login</MenuItem>
+            <MenuItem onClick={() => handleRowClick(params)}>See Daily Sessions</MenuItem>
           </Menu>
         </>
       ),
@@ -154,28 +170,37 @@ export default function DataTable() {
     password: user.password,
     subscription: user.subscription,
     isLoggedIn: user.isLoggedIn,
-    sessionDuration: (user.sessionDuration / 3600).toFixed(2) // Convert to minutes and round to 2 decimal places
+    dailySessions: user.dailySessions,
+    sessionDuration: (user.sessionDuration / 3600).toFixed(2) // Convert to hours and round to 2 decimal places
   }));
 
   return (
-    <div style={{ height: "60vh", width: "100%" }}>
-      <DataGrid
-        rows={transformedData}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-      />
-      <UpdatePasswordModal
-        open={passwordModalOpen}
-        onClose={() => setPasswordModalOpen(false)}
-        onSave={handlePasswordSave}
-      />
-      <ConfirmDeactivateModal
-        open={confirmDeactivateModalOpen}
-        onClose={() => setConfirmDeactivateModalOpen(false)}
-        onConfirm={handleConfirmDeactivate}
-        isActive={selectedUser?.isLoggedIn}
-      />
+    <div>
+      <div style={{ height: "60vh", width: "100%" }}>
+        <DataGrid
+          rows={transformedData}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          onRowClick={handleRowClick}
+        />
+        <UpdatePasswordModal
+          open={passwordModalOpen}
+          onClose={() => setPasswordModalOpen(false)}
+          onSave={handlePasswordSave}
+        />
+        <ConfirmDeactivateModal
+          open={confirmDeactivateModalOpen}
+          onClose={() => setConfirmDeactivateModalOpen(false)}
+          onConfirm={handleConfirmDeactivate}
+          isActive={selectedUser?.isLoggedIn}
+        />
+        <SessionGraphModal
+          open={sessionGraphModalOpen}
+          onClose={() => setSessionGraphModalOpen(false)}
+          dailySessions={dailySessions}
+        />
+      </div>
     </div>
   );
 }

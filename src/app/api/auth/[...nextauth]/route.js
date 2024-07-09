@@ -1,4 +1,5 @@
 
+
 // import { connectMongoDB } from "@/lib/mongodb";
 // import User from "@/models/user";
 // import NextAuth from "next-auth/next";
@@ -29,12 +30,19 @@
 
 //           // Check if user is already logged in on another device
 //           if (user.isLoggedIn) {
-//             throw new Error(`You are already logged in on a ${user.deviceName} ${user.browserName} ${user.deviceDevice} please logout from it to continue.`);
+//             throw new Error(`You are already logged in on a ${user.deviceName} ${user.deviceDevice} ${user.browserName} browser.  Please logout from it to continue.`);
 //           }
 
 //           await User.updateOne(
 //             { email },
-//             { deviceId, browserName, deviceName, deviceDevice, isLoggedIn: true }
+//             {
+//               deviceId,
+//               browserName,
+//               deviceName,
+//               deviceDevice,
+//               isLoggedIn: true,
+//               loginTimestamp: new Date(), // Update loginTimestamp here
+//             }
 //           );
 
 //           return { ...user.toObject(), deviceId, browserName, deviceName };
@@ -57,6 +65,8 @@
 //           browserName: user.browserName,
 //           deviceName: user.deviceName,
 //           deviceDevice: user.deviceDevice,
+//           sessionDuration: user.sessionDuration,
+//           dailySessions: user.dailySessions
 //         };
 //       }
 //       return token;
@@ -73,6 +83,9 @@
 //           browserName: token.browserName,
 //           deviceName: token.deviceName,
 //           deviceDevice: token.deviceDevice,
+//           sessionDuration: token.sessionDuration,
+//           dailySessions: token.dailySessions
+
 //         },
 //       };
 //     },
@@ -81,7 +94,7 @@
 //         await connectMongoDB();
 //         await User.updateOne(
 //           { email: token.email },
-//           { deviceId: null, browserName: null, deviceName: null, deviceDevice, isLoggedIn: true }
+//           { deviceId: null, browserName: null, deviceName: null, deviceDevice: null, isLoggedIn: false }
 //         );
 //       } catch (error) {
 //         console.error("Error logging out: ", error);
@@ -100,8 +113,6 @@
 // const handler = NextAuth(authOptions);
 
 // export { handler as GET, handler as POST };
-
-
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import NextAuth from "next-auth/next";
@@ -135,6 +146,16 @@ export const authOptions = {
             throw new Error(`You are already logged in on a ${user.deviceName} ${user.deviceDevice} ${user.browserName} browser.  Please logout from it to continue.`);
           }
 
+          // Initialize dailySessions if it doesn't exist
+          if (!user.dailySessions || user.dailySessions.length === 0) {
+            user.dailySessions = [
+              {
+                date: new Date().toISOString().split('T')[0], // today's date as string
+                timeSpent: 0, // initialize time spent to 0
+              },
+            ];
+          }
+
           await User.updateOne(
             { email },
             {
@@ -144,6 +165,7 @@ export const authOptions = {
               deviceDevice,
               isLoggedIn: true,
               loginTimestamp: new Date(), // Update loginTimestamp here
+              dailySessions: user.dailySessions, // Ensure dailySessions is saved
             }
           );
 
@@ -167,7 +189,8 @@ export const authOptions = {
           browserName: user.browserName,
           deviceName: user.deviceName,
           deviceDevice: user.deviceDevice,
-          sessionDuration: user.sessionDuration
+          sessionDuration: user.sessionDuration,
+          dailySessions: user.dailySessions
         };
       }
       return token;
@@ -184,7 +207,9 @@ export const authOptions = {
           browserName: token.browserName,
           deviceName: token.deviceName,
           deviceDevice: token.deviceDevice,
-          sessionDuration: token.sessionDuration
+          sessionDuration: token.sessionDuration,
+          dailySessions: token.dailySessions
+
         },
       };
     },

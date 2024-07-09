@@ -71,7 +71,14 @@ const userSchema = new mongoose.Schema(
     deviceId: {
       type: String,
       default: null,
-    },  // Add this field
+    },
+    dailySessions: [
+      {
+        date: { type: String, required: true }, // storing date as string for simplicity
+        timeSpent: { type: Number, required: true }, // time spent in seconds
+      },
+    ],
+  
     sessionUUID: { type: String, default: null },
     browserName: { type: String, required: false },
     deviceName: { type: String, required: false },

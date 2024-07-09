@@ -49,12 +49,12 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req) {
   try {
-    const { name, email, password, company, role, subscription, deviceId, browserName, deviceName, deviceDevice, sessionDuration    } = await req.json();
+    const { name, email, password, company, role, subscription, deviceId, browserName, deviceName, deviceDevice, sessionDuration, dailySessions    } = await req.json();
     const hashedPassword = await bcrypt.hash(password, 10);
     await connectMongoDB();
     
     // Create a new user with isLoggedIn set to false by default
-    await User.create({ name, email, password: hashedPassword, company, deviceId, role,browserName, deviceName, deviceDevice, subscription, sessionDuration, isLoggedIn: false, isActive: true });
+    await User.create({ name, email, password: hashedPassword, company, deviceId, role,browserName, deviceName, deviceDevice, subscription, sessionDuration,dailySessions, isLoggedIn: false, isActive: true });
 
     return NextResponse.json({ success: true, message: "User registered." }, { status: 201 });
   } catch (error) {
