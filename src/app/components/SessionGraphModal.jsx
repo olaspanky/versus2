@@ -55,8 +55,8 @@ const SessionGraphModal = ({ open, onClose, dailySessions }) => {
       labels: dailySessions.map(session => session.date),
       datasets: [
         {
-          label: 'Time Spent (hours)',
-          data: dailySessions.map(session => (session.timeSpent / 3600).toFixed(2)), // Convert seconds to hours
+          label: 'Time Spent (minutes)',
+          data: dailySessions.map(session => (session.timeSpent / 60).toFixed(2)), // Convert seconds to hours
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
@@ -71,25 +71,25 @@ const SessionGraphModal = ({ open, onClose, dailySessions }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ p: 4, backgroundColor: 'white', margin: 'auto', marginTop: '10%', width: '80%', borderRadius: '10px' }}>
+        <Box sx={{ p: 4, backgroundColor: 'white', margin: 'auto', marginTop: '1%', width: '80%', borderRadius: '10px' }}>
           <h3>Daily Sessions</h3>
           <Line data={sessionGraphData} />
-          <table>
+          {/* <table>
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Time Spent (hours)</th>
+                <th>Time Spent (minutes)</th>
               </tr>
             </thead>
             <tbody>
               {dailySessions.map(session => (
                 <tr key={session._id}>
                   <td>{session.date}</td>
-                  <td>{(session.timeSpent / 3600).toFixed(2)}</td>
+                  <td>{(session.timeSpent / 60).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> */}
         </Box>
       </Modal>
     );
