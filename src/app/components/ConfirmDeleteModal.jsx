@@ -18,7 +18,7 @@ const ConfirmDeleteModal = ({ open, onClose, onConfirm }) => {
           Are you sure you want to delete this user and all their data?
         </Typography>
         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'space-between' }}>
-          <Button className="red" variant="contained" color="warning" onClick={onConfirm}>
+          <Button className="red" variant="outlined" color="warning" onClick={onConfirm}>
             Confirm
           </Button>
           <Button variant="outlined" onClick={onClose}>
