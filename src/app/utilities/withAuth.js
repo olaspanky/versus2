@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slice/userSlice';
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
+import Loading from "../components/Loading3"
 
 const withAuth = (WrappedComponent) => {
   const AuthComponent = (props) => {
@@ -39,8 +40,10 @@ const withAuth = (WrappedComponent) => {
 
     // If session status is loading, return a loading indicator or message
     if (status === "loading") {
-      return <div>Loading...</div>;
-    }
+      return (  <div className="flex justify-center items-center w-full h-screen">
+      <Loading/>
+    </div>
+      )    }
 
     return <WrappedComponent {...props} />;
   };

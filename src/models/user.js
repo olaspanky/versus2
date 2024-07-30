@@ -16,8 +16,6 @@ const locationSchema = new mongoose.Schema({
   state: String,
 });
 
-
-
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -78,12 +76,11 @@ const userSchema = new mongoose.Schema(
         timeSpent: { type: Number, required: true }, // time spent in seconds
       },
     ],
-  
+
     sessionUUID: { type: String, default: null },
     browserName: { type: String, required: false },
     deviceName: { type: String, required: false },
-  deviceDevice: { type: String, required: false }
-
+    deviceDevice: { type: String, required: false },
   },
   { timestamps: true }
 );
