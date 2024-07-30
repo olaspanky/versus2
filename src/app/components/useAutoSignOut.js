@@ -3,7 +3,7 @@ import { signOut } from 'aws-amplify/auth';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
-const useAutoSignOut = (signOutHandler, timeout = 1800000) => { // 300000 ms = 5 minutes
+const useAutoSignOut = (signOutHandler, timeout = 650000) => { // 300000 ms = 5 minutes
   const router = useRouter();
   const timer = useRef(null);
 

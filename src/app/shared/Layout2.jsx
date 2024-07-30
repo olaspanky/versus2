@@ -41,7 +41,7 @@ const Layout2 = ({ children }) => {
     };
 
     // Update accumulated time every 8 minutes (480000 milliseconds)
-    const timeUpdateInterval = setInterval(updateAccumulatedTime, 60000);
+    const timeUpdateInterval = setInterval(updateAccumulatedTime, 900000);
 
     // Sync with database every 10 minutes (600000 milliseconds)
     const syncWithDatabase = async () => {
@@ -90,7 +90,7 @@ const Layout2 = ({ children }) => {
       }
     };
 
-    const databaseSyncInterval = setInterval(syncWithDatabase, 24000);
+    const databaseSyncInterval = setInterval(syncWithDatabase, 600000);
 
     // Pause/Resume timer based on visibility
     const handleVisibilityChange = () => {
