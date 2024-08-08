@@ -23,8 +23,12 @@ function App() {
 
      useEffect(() => {
    
-      const atc2 = subscription;
-      console.log(atc2); // This will output the array
+       const atc2 = subscription;
+        // Use atc2 here
+
+        const capitalize = (str) => {
+          return str.replace(/\b\w/g, char => char.toUpperCase());
+        };      console.log(atc2); // This will output the array
 
   
 
@@ -53,14 +57,14 @@ if(atc2){
     const chunk8 = atc2.slice(chunkSize * 7);
     
     // Join each chunk into strings
-      atc2String = chunk1.join(',');
-      atc2_1string = chunk2.join(',');
-      atc2_2string = chunk3.join(',');
-      atc2_3string = chunk4.join(',');
-      atc2_4string = chunk5.join(',');
-      atc2_5string = chunk6.join(',');
-      atc2_6string = chunk7.join(',');
-      atc2_7string = chunk8.join(',');
+    atc2String = capitalize(chunk1.join(','));
+    atc2_1string = capitalize(chunk2.join(','));
+    atc2_2string = capitalize(chunk3.join(','));
+    atc2_3string = capitalize(chunk4.join(','));
+    atc2_4string = capitalize(chunk5.join(','));
+    atc2_5string = capitalize(chunk6.join(','));
+    atc2_6string = capitalize(chunk7.join(','));
+    atc2_7string = capitalize(chunk8.join(','));
   
       //console.log("atc2String : ",atc2String);
       //console.log("atc2_1string : ",atc2_1string);
