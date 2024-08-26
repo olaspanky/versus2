@@ -11,6 +11,8 @@ import '@aws-amplify/ui-react/styles.css';
 import withAuth from '../utilities/withAuth';
 import TimeMe from 'timeme.js';
 import { useSession } from "next-auth/react";
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 
 Amplify.configure(awsconfig);
 
@@ -123,6 +125,9 @@ const Layout2 = ({ children }) => {
             <Topbar />
           </div>
           <div className='z-20 mt-2 px-3 lg:px-9 bg-[#f6f6f6] h-auto custom-scrollbar'>
+          <TawkMessengerReact
+                propertyId="66c47c33ea492f34bc08163c"
+                widgetId="1i5noaafu"/>
             {children}
           </div>
         </div>

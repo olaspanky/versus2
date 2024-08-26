@@ -117,6 +117,17 @@ const Sidebar = ({ title, icon, subItems }) => {
               </div>
             </Link>
           </div>
+          <div className="relative transition mt-9">
+            <Link href="/pbr/overview">
+              <div
+                className={`relative m-2 flex items-center gap-2  rounded-xl  py-3 pl-5 text-sm text-white ${
+                  currentRoute === "/pbr/overview" ? "bg-[#81B1D0]" : ""
+                }`}
+              >
+                <h1 className="text-lg font-semibold">Overview</h1>
+              </div>
+            </Link>
+          </div>
         </div>
 
         <div className="my-2 max-h-[80%] overflow-auto no-scrollbar custom-scrollbar">

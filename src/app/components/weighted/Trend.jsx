@@ -22,10 +22,7 @@ function App() {
    
     const atc2 = userData;
     console.log(atc2); // This will output the array
-    const capitalize = (str) => {
-      return str.replace(/\b\w/g, char => char.toUpperCase());
-    };
-
+   
   
 
 
@@ -53,6 +50,10 @@ if(atc2){
     const chunk8 = atc2.slice(chunkSize * 7);
     
     // Join each chunk into strings
+    const capitalize = (str) => {
+      return str.replace(/\b\w/g, char => char.toUpperCase());
+    };
+
     atc2String = capitalize(chunk1.join(','));
     atc2_1string = capitalize(chunk2.join(','));
     atc2_2string = capitalize(chunk3.join(','));
