@@ -117,7 +117,7 @@ const Sidebar = ({ title, icon, subItems }) => {
               </div>
             </Link>
           </div>
-          <div className="relative transition mt-9">
+          <div className="relative transition mt-2">
             <Link href="/pbr/overview">
               <div
                 className={`relative m-2 flex items-center gap-2  rounded-xl  py-3 pl-5 text-sm text-white ${

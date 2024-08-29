@@ -134,7 +134,7 @@ const YourComponent = () => {
 
       subItems: [
         {
-          title: "Market Overview",
+          title: "Retail Market Overview",
           path: "/pbr/therapy/market",
         },
         // {
@@ -189,7 +189,7 @@ const YourComponent = () => {
 
       subItems: [
         {
-          title: "Numeric Selling Distribution",
+          title: "Retail Numeric Distribution",
           path: "/pbr/channel/numeric",
 
           links: "sku",
