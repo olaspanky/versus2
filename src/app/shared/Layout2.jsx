@@ -19,6 +19,8 @@ Amplify.configure(awsconfig);
 const Layout2 = ({ children }) => {
   const [accumulatedTime, setAccumulatedTime] = useState(0);
   const { data: session } = useSession();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
 
   useEffect(() => {
     // Initialize TimeMe.js
@@ -117,14 +119,14 @@ const Layout2 = ({ children }) => {
   return (
     <div className='max-w-[100vw] flex justify-center items-center font-custom'>
       <div className='flex gap-0 h-auto w-full'>
-        <div className='z-40 hidden lg:block bg-white h-96 sticky top-0 w-[370px] max-h-[1080px]'>
-          <Sidebar />
+        <div className={`z-40 hidden lg:block bg-white h-96 sticky top-0 ${isSidebarOpen ? "hidden" : "hidden lg:hidden"} max-h-[1080px]`}>
+          <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
         </div>
         <div className='bg-gray-100 flex flex-col text-sm w-full font-light h-full'>
           <div className='z-30 sticky top-0'>
             <Topbar />
           </div>
-          <div className='z-20 mt-2 px-3 lg:px-9 bg-[#f6f6f6] h-auto custom-scrollbar'>
+          <div className='z-20 mt-2 px-3 lg:px-9 bg-[#f6f6f6] w-full h-auto custom-scrollbar'>
           <TawkMessengerReact
                 propertyId="66c47c33ea492f34bc08163c"
                 widgetId="1i5noaafu"/>
