@@ -5,15 +5,8 @@ import Drop from "./Dropdown"
 import Box from "./therapy/Box2"
 import Clip from "./Country"
 import data from "../../../public/assets/data.svg"
-import brand from "../../../public/assets/brand.svg"
-import brandw from "../../../public/assets/brandw.svg"
-import sku from "../../../public/assets/sku.svg"
-import skuw from "../../../public/assets/skuw.svg"
-import pharm from "../../../public/assets/pharm.svg"
-import pharmw from "../../../public/assets/pharmw.svg"
-import sold from "../../../public/assets/sold.svg"
-import soldw from "../../../public/assets/soldw.svg"
-import state from "../../../public/assets/state.svg"
+import arr from "../../../public/assets/arr.svg"
+import arl from "../../../public/assets/arl.png"
 import ghana from "../../../public/assets/ghana.png"
 import cameroon from "../../../public/assets/cameroon.png"
 import ivory from "../../../public/assets/ivory.png"
@@ -61,11 +54,19 @@ const Home2 =() => {
       title: '1.5M',
       description: 'Nigeria',
       icon: nigeria,
+      link: "/pbr/overview",
+      icon2: arr,
+      icon3: arl
     },
     {
       title: '8,000',
       description: 'Ghana',
       icon: ghana,
+      link: "/pbr/construction"
+      ,
+      icon2: arr,
+      icon3: arl
+
 
     },
    
@@ -73,12 +74,22 @@ const Home2 =() => {
       title: '1,860',
       description: 'Kenya',
       icon: kenya,
+      link: "/pbr/construction"
+      ,
+      icon2: arr,
+      icon3: arl
+
 
     },
     {
       title: '20M',
       description: 'Ivory Coast',
       icon: ivory,
+      link: "/pbr/construction"
+      ,
+      icon2: arr,
+      icon3: arl
+
 
     },
     
@@ -86,12 +97,20 @@ const Home2 =() => {
       title: '1,860',
       description: 'Senegal',
       icon: senegal,
+      link: "/pbr/construction"
+      ,
+      icon2: arr,
+      icon3: arl
 
     },
     {
       title: '10,000',
       description: 'Cameroon',
       icon: cameroon,
+      link: "/pbr/construction"
+      ,
+      icon2: arr,
+      icon3: arl
 
     },
    
