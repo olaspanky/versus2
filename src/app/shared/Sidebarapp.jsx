@@ -102,7 +102,7 @@ const Sidebar = ({ title, icon, subItems }) => {
         <div className="flex justify-center my-5">
          
         <div
-  className={`absolute top-[42vh] -right-[24px] z-1 p-[3px] bg-gray-100 transform -translate-y-1/2 flex justify-center items-center rounded-r-full rounded-l-none shadow-lg focus:outline-none transition-transform duration-300`}
+  className={`absolute top-[42vh] -right-[30px] z-1 p-[3px] py-9 bg-gray-100 transform -translate-y-1/2 flex justify-center items-center rounded-r-full rounded-l-none shadow-lg focus:outline-none transition-transform duration-300`}
 >
   <button
     onClick={toggleSidebar}
