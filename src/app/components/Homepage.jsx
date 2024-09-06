@@ -117,7 +117,7 @@ const Home2 =() => {
 
         </div>
 
-       <div className='flex flex-col gap-9 justify-center items-center my-36'>
+       <div className='flex flex-col gap-9 justify-center items-center my-24'>
         <p className='text-5xl text-[#2D2D2D]  font-bold  '>We are creating something amazing</p>
         <p className='text-2xl text-[#2D2D2D] font-bold'>we will launch soon.</p>
 
