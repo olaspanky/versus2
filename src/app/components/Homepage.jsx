@@ -110,27 +110,30 @@ const Home2 =() => {
     <main className="  flex h-[100vh] w-full flex-col gap-9  font-custom2">
 
         <div className='my-7 flex flex-col gap-5'>
-        <div><h1 className='text-2xl font-extrabold text-primary font-custom'>Welcome To VERSUS&#8482;</h1></div>
-        <div className='bg-white p-3 rounded-md'><p className='text-lg'>This platform provides you with unparalleled access to critical data and insights, enabling you to gain a comprehensive understanding of your organization and brand's performance within retail pharmacies. VERSUS&#8482; was meticulously crafted using real sell-out data obtained from pharmacies, capturing essential metrics. With VERSUS&#8482;, you gain access to a suite of comprehensive and objective dashboards, including:</p></div>
+        <div><h1 className='text-2xl font-extrabold text-primary font-custom'>Welcome To VERSUS&#8482; Platform</h1></div>
+        <div className='bg-white p-3 rounded-md'>
+          <p className='text-lg'>This platform provides you with unparalleled access to critical data and insights, enabling you to gain a comprehensive understanding of your organization and brand's performance within retail pharmacies. VERSUS&#8482; was meticulously crafted using real sell-out data obtained from pharmacies, capturing essential metrics. With VERSUS&#8482;, you gain access to a suite of comprehensive and objective dashboards, including:</p>
+          </div>
 
         </div>
 
-       <div className='flex justify-center items-center my-36'>
-        <p className='text-5xl text-primary font-bold text-bold '>Page is under Construction</p>
+       <div className='flex flex-col gap-9 justify-center items-center my-36'>
+        <p className='text-5xl text-[#2D2D2D]  font-bold  '>We are creating something amazing</p>
+        <p className='text-2xl text-[#2D2D2D] font-bold'>we will launch soon.</p>
+
+        <div className='flex w-full justify-center gap-3 items-center'>
+          <input 
+          placeholder="Enter your email"
+          className="p-3 w-96 rounded-lg"
+          />
+
+          <button className='p-3 bg-primary text-white rounded-[16px] w-32'>Subscribe</button>
+        </div>
+
        </div>
 
-       <div className='my-3 flex flex-wrap-reverse md:flex-nowrap gap-20 justify-between p-3 md:p-9 bg-white rounded-md  items-center'>
-      <div className='w-1/4'>
-        <Image alt="alt" src={data} />
-      </div>
+       
 
-      <div className='w-3/4 md:p-2 lg:p-10'>
-        <p className='text-lg text-black font-custom2 '>
-        With VERSUS, you can make data-driven decisions, gain a competitive edge, and unlock new growth opportunities by harnessing the power of actionable insights derived from real-world retail pharmacy data. Welcome to a new era of data-driven decision-making in the retail pharmaceutical industry.
-        </p>
-      </div>
-
-    </div>
 
     
     </main>
