@@ -101,22 +101,32 @@ const Sidebar = ({ title, icon, subItems }) => {
       <div className="flex h-full flex-col shadow-xl bg-gradient-to-b from-[#177199] via-[#115573] to-[#01212F]">
         <div className="flex justify-center my-5">
          
-         <button
-          onClick={toggleSidebar}
-          className={`absolute top-7 -right-[10px] transform -translate-y-1/2  text-[white] font-bold text-5xl rounded-full p-2 shadow-lg focus:outline-none transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        <div
+  className={`absolute top-[42vh] -right-[24px] z-1 p-[3px] bg-gray-100 transform -translate-y-1/2 flex justify-center items-center rounded-r-full rounded-l-none shadow-lg focus:outline-none transition-transform duration-300`}
+>
+  <button
+    onClick={toggleSidebar}
+    className={`text-primary font-[48px] text-5xl focus:outline-none transition-transform duration-300 ${
+      isOpen ? "rotate-180" : ""
+    }`}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={3}
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </button>
+</div>
+
         </div>
 
         <div className={`flex justify-center my-5 ${!isOpen && "hidden"}`}>
