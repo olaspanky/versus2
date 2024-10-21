@@ -62,7 +62,7 @@ const Home2 =() => {
       title: '8,000',
       description: 'Ghana',
       icon: ghana,
-      link: "/pbr/construction"
+      link: "/pbr/ghana"
       ,
       icon2: arr,
       icon3: arl
