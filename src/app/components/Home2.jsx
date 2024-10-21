@@ -110,7 +110,7 @@ const Home2 =() => {
     <main className="  flex h-full w-full flex-col gap-9  font-custom2">
 
         <div className='my-7 flex flex-col gap-5'>
-        <div><h1 className='text-2xl font-extrabold text-primary font-custom'>Welcome To VERSUS&#8482; Platform</h1></div>
+        <div><h1 className='text-2xl font-extrabold text-primary font-custom'>Welcome To VERSUS&#8482; Nigeria Platform</h1></div>
         <div className='bg-white p-3 rounded-md'><p className='text-lg'>This platform provides you with unparalleled access to critical data and insights, enabling you to gain a comprehensive understanding of your organization and brand's performance within retail pharmacies. VERSUS&#8482; was meticulously crafted using real sell-out data obtained from pharmacies, capturing essential metrics. With VERSUS&#8482;, you gain access to a suite of comprehensive and objective dashboards, including:</p></div>
 
         </div>
