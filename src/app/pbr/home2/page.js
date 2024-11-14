@@ -8,11 +8,9 @@ import Home2 from "../../components/Overview"
 
 const Home = () =>{
   return (
-    <Layout2>
-    <main className="bg-gray-100 flex flex-col items-center h-[100vh] justify-between ">
+    <main className="bg-gray-100 flex flex-col items-center h-[100vh] justify-between p-9 ">
       <Home2/>
     </main>
-    </Layout2>
   )
 }
 export default Home
