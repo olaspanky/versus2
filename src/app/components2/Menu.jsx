@@ -165,24 +165,7 @@ const YourComponent = () => {
 
           links: "sku",
         },
-        // {
-        //   title: "Competitive Analysis",
-        //   path: "/pbr/brand/competitive",
-
-        //   links: "sku",
-        // },
-        // {
-        //   title: "Patient Uptake",
-        //   path: "/pbr/brand/patient",
-
-        //   links: "sku",
-        // },
-        // {
-        //   title: "Co-prescription Analysis",
-        //   path: "/pbr/brand/prescription", 
-
-        //   links: "sku",
-        // },
+       
       ],
     },
     {
@@ -199,18 +182,12 @@ const YourComponent = () => {
           links: "sku",
         },
        
-        // {
-        //   title: "Weighted Selling Distribution",
-        //   path: "/pbr/channel/weighted",
-
-        //   links: "sku",
-        // },
+        
       ],
     },
     {
       title: "Support",
       path: "/pbr-ghana/setting2/", // Corrected path
-
       links: "sku",
 
       subItems: [
