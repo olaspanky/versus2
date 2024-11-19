@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 
 function App() {
   const [dashboardId, setDashboardId] = useState(
-    "d8c5b0c7-6a9b-408e-92c7-fa45f630a17e"
+    "e3df06e5-90a3-4918-9fad-c79d4b4314ae"
   );
   const [dashboardUrl, setDashboardUrl] = useState(null);
   const [embeddingContext, setEmbeddingContext] = useState(null);
@@ -92,7 +92,7 @@ function App() {
 
       const timeout = setTimeout(() => {
         fetch(
-          `https://ar2qhujbfgipevxg67pxzajoei0rrivg.lambda-url.eu-central-1.on.aws/?dashboardId=${dashboardId}&atc2=${atc2String}&atc2_1=${atc2_1string}&atc2_2=${atc2_2string}&atc2_3=${atc2_3string}&atc2_4=${atc2_4string}&atc2_5=${atc2_5string}&atc2_6=${atc2_6string}&atc2_7=${atc2_7string}`
+          `https://acnjewnxnpahnkc5z4lu7mhmrq0nqnpt.lambda-url.eu-central-1.on.aws/?dashboardId=${dashboardId}&atc2=${atc2String}&atc2_1=${atc2_1string}&atc2_2=${atc2_2string}&atc2_3=${atc2_3string}&atc2_4=${atc2_4string}&atc2_5=${atc2_5string}&atc2_6=${atc2_6string}&atc2_7=${atc2_7string}`
           // fetch(`https://45cremxqhft77cxalzqpfnnjiu0arpwo.lambda-url.eu-central-1.on.aws/?dashboardId=7db85091-b869-4f78-95b5-8a04c96b70ed`
         )
           .then((response) => response.json())
@@ -145,7 +145,7 @@ function App() {
         <div className="flex flex-col md:flex-row gap-5 justify-between items-center my-5">
           <div className="">
             <h1 className="text-4xl font-extrabold my-10">
-              Therapy Area Analytic - Market Overview Dashboard
+              Ghana Therapy Area Analytic - Market Overview Dashboard
             </h1>
           </div>
           <div className="bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md">

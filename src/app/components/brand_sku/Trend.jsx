@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 
 
 function App() {
-  const [dashboardId, setDashboardId] = useState('5fa64272-5f0a-4ffd-b6d8-8793bcd03b58');
+  const [dashboardId, setDashboardId] = useState('e9a71ae3-417b-4776-aff8-778da2b72b16');
 
   const [dashboardUrl, setDashboardUrl] = useState(null);
   const [embeddingContext, setEmbeddingContext] = useState(null);
@@ -99,7 +99,7 @@ if(atc2){
   
   
         const timeout = setTimeout(() => {
-          fetch(`https://acnjewnxnpahnkc5z4lu7mhmrq0nqnpt.lambda-url.eu-central-1.on.aws/?dashboardId=${dashboardId}&atc2=${atc2String}&atc2_1=${atc2_1string}&atc2_2=${atc2_2string}&atc2_3=${atc2_3string}&atc2_4=${atc2_4string}&atc2_5=${atc2_5string}&atc2_6=${atc2_6string}&atc2_7=${atc2_7string}`
+          fetch(`https://ar2qhujbfgipevxg67pxzajoei0rrivg.lambda-url.eu-central-1.on.aws/?dashboardId=${dashboardId}&atc2=${atc2String}&atc2_1=${atc2_1string}&atc2_2=${atc2_2string}&atc2_3=${atc2_3string}&atc2_4=${atc2_4string}&atc2_5=${atc2_5string}&atc2_6=${atc2_6string}&atc2_7=${atc2_7string}`
           // fetch(`https://45cremxqhft77cxalzqpfnnjiu0arpwo.lambda-url.eu-central-1.on.aws/?dashboardId=7db85091-b869-4f78-95b5-8a04c96b70ed`
           ).then((response) => response.json()
           ).then((response) => {

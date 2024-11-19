@@ -60,7 +60,7 @@ export default function Home() {
         </div>
 
         <div className='flex flex-col md:flex-row gap-5 justify-between items-center my-5'>
-    <div className=''><h1 className='text-4xl font-extrabold '>Ghana Brand Analytic - Brand Share Analytics Dashboard</h1></div>
+    <div className=''><h1 className='text-4xl font-extrabold '>Ghana Brand Analytic - Brand Analytics Dashboard</h1></div>
     <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
     <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
           </div>

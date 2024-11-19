@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import Layout2 from '@/app/shared/Layout2'
+import Layout2 from '@/app/shared/Layout'
 import Performance from "../../../components2/company_analytic/Performance"
 import withAuth from '@/app/utilities/withAuth'
       

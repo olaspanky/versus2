@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 
 function App() {
-  const [dashboardId, setDashboardId] = useState('cbfca22f-ae73-4acf-afec-28e830839eeb');
+  const [dashboardId, setDashboardId] = useState('3b381c4c-6f13-4196-81fa-fe2c7e3c4c26');
   const [dashboardUrl, setDashboardUrl] = useState(null);
   const [embeddingContext, setEmbeddingContext] = useState(null);
  const [loading, setLoading] = useState(true);
@@ -146,7 +146,7 @@ if(atc2){
     <>
       <main>
       <div className='flex flex-col md:flex-row gap-5 justify-between items-center my-5'>
-<div className=''><h1 className='text-4xl font-extrabold '>Company Analytic - Company Brand Dashboard</h1></div>
+<div className=''><h1 className='text-4xl font-extrabold '>Ghana Company Analytic - Company Brand Dashboard</h1></div>
 <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
 <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
     </div>

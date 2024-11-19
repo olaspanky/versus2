@@ -49,7 +49,7 @@ export default function Home() {
             <div className="">
               <h1 className="md:text-4xl text-xl font-extrabold ">
                 {" "}
-                Channel Analytic - Numeric Selling
+               Ghana Channel Analytic - Numeric Selling
                 Distribution (BRAND) Dashboard
               </h1>
             </div>
@@ -64,7 +64,7 @@ export default function Home() {
             <div className="">
               <h1 className="md:text-4xl text-xl font-extrabold ">
                 {" "}
-                Channel Analytic - Numeric Selling Distribution (SKU) Dashboard
+                Ghana Channel Analytic - Numeric Selling Distribution (SKU) Dashboard
               </h1>
             </div>
             <div className="bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md"></div>

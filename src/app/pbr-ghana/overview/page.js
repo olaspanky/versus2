@@ -1,7 +1,7 @@
 
 "use client"
 import Image from 'next/image'
-import Layout2 from '@/app/shared/Layout2'
+import Layout2 from '@/app/shared/Layout'
 import Home2 from "../../components/Home2"
 
 

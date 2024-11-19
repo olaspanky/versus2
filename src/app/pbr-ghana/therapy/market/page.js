@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import Layout2 from '@/app/shared/Layout2'
-import Market from "../../../components/therapymarket/Market"
+import Market from "../../../components2/therapymarket/Market"
 import withAuth from '@/app/utilities/withAuth'
 
       
