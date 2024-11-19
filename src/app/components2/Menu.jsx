@@ -150,6 +150,8 @@ const YourComponent = () => {
     {
       title: "Brand Analytics",
       path: "/pbr-ghana/brand/brand_share",
+      links: "sku",
+
 
       subItems: [
         {
@@ -186,6 +188,8 @@ const YourComponent = () => {
     {
       title: "Channel Analytics",
       path: "/pbr-ghana/channel/numeric",
+      links: "sku",
+
 
       subItems: [
         {
