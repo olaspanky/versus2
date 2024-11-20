@@ -329,11 +329,19 @@ const SignUp = () => {
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedCountries, setSelectedCountries] = useState([]);
+
+  const countries = [
+    "Nigeria",
+    "Ghana",
+   
+  ]; // Array of countries
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password || !subscription) {
+    if (!name || !email || !password || !subscription ||!selectedCountries.length) {
       showAlert("All fields are necessary.", "error");
       return;
     }
@@ -369,7 +377,8 @@ const SignUp = () => {
           password,
           subscription,
           company,
-          role
+          role,
+          selectedCountries
         }),
       });
 
@@ -390,6 +399,14 @@ const SignUp = () => {
 
   const handleDropdownChange = (selected) => {
     setSubscription(selected);
+  };
+
+  const handleCountryChange = (e) => {
+    const { value, checked } = e.target;
+
+    setSelectedCountries((prev) =>
+      checked ? [...prev, value] : prev.filter((country) => country !== value)
+    );
   };
 
   return (
@@ -486,6 +503,25 @@ const SignUp = () => {
                     selectedOption={subscription}
                     setSelectedOptions={handleDropdownChange}
                   />
+
+<div className="flex flex-col mb-4">
+              <label className="text-gray-700 font-semibold mb-1">Countries</label>
+              <div className="grid grid-cols-2 gap-2">
+                {countries.map((country) => (
+                  <div key={country} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      value={country}
+                      onChange={handleCountryChange}
+                      checked={selectedCountries.includes(country)}
+                      className="mr-2"
+                    />
+                    <label>{country}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
 
                   <div className="flex flex-col">
                     <label
