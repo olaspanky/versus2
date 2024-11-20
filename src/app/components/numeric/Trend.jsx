@@ -4,7 +4,7 @@
 
 "use client";
 import React, { useState, useEffect } from 'react';
-import Dashboard from "@/app/components/dashboard";
+import Dashboard from "@/app/components/Dashboard";
 import Cookies from "js-cookie";
 
 export default function PageOne() {
