@@ -10,6 +10,8 @@ import ivory from "../../../public/assets/ivory.png";
 import kenya from "../../../public/assets/kenya.png";
 import nigeria from "../../../public/assets/nigeria.png";
 import senegal from "../../../public/assets/senegal.png";
+import { useSession } from "next-auth/react";
+
 
 const Home2 = () => {
   // Function to handle country click and store country in localStorage
@@ -17,6 +19,7 @@ const Home2 = () => {
     // Set country in localStorage
     localStorage.setItem("country", country); // Store country in localStorage
   };
+  
 
   const Clipdata = [
     {

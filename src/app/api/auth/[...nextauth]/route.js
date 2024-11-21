@@ -70,7 +70,7 @@ export const authOptions = {
           ...token,
           id: user._id,
           subscription: user.subscription,
-          countries: user.selectedCountries,
+          selectedCountries: user.selectedCountries,
           role: user.role,
           deviceId: user.deviceId,
           browserName: user.browserName,
@@ -89,7 +89,7 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           subscription: token.subscription,
-          countries: token.selectedCountries,
+          selectedCountries: token.selectedCountries,
           role: token.role,
           deviceId: token.deviceId,
           browserName: token.browserName,
@@ -97,7 +97,6 @@ export const authOptions = {
           deviceDevice: token.deviceDevice,
           sessionDuration: token.sessionDuration,
           dailySessions: token.dailySessions
-
         },
       };
     },

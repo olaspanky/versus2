@@ -70,11 +70,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    selectedCountries: {
+      type: [String], // Array of strings to store country names
+      default: [],    // Default is an empty array
+    },
     dailySessions: [
       {
         date: { type: String, required: true }, // storing date as string for simplicity
         timeSpent: { type: Number, required: true }, // time spent in seconds
       },
+     
     ],
 
     sessionUUID: { type: String, default: null },

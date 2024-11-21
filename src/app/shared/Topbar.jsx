@@ -40,6 +40,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   const name = session?.user?.name;
   const role = session?.user?.role;
   const location = session?.user?.location;
+  const selectedCountries = session?.user?.selectedCountries;
   
   const existingCookie = Cookies.get("atc");
   
@@ -56,6 +57,7 @@ const Sidebar = ({ title, icon, subItems }) => {
   console.log("Subscription is", subscription);
   console.log("already exists is", existingCookie);
   console.log("location is ", location);
+  console.log("selectedCountries is ", selectedCountries);
 
 
 
