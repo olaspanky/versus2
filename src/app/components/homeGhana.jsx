@@ -71,14 +71,14 @@ const Home2 =() => {
   ];
   const Clipdata = [
     {
-      title: '8,000',
+      title: '2,706',
       description: 'Brands',
       icon: brandw,
       icon2: brand
 
     },
     {
-      title: '10,000',
+      title: '1,437',
       description: 'SKUs',
       icon: sku,
       icon2: skuw
@@ -98,7 +98,7 @@ const Home2 =() => {
       icon2: pharmw
     },
     {
-      title: '1,860',
+      title: '1,143',
       description: 'Companies',
       icon: state,
       icon2: statew
