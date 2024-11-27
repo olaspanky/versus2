@@ -10,6 +10,7 @@ const MenuItem = ({ title, icon, subItems, path }) => {
   const [activeSubMenu, setActiveSubMenu] = useState(null);
   const router = useRouter();
 
+
   const handleClick = (e) => {
     e.preventDefault();
     router.push(path);
@@ -20,16 +21,13 @@ const MenuItem = ({ title, icon, subItems, path }) => {
     router.push(routPath);
   };
 
-  ////console.log("currentRoute:", currentRoute);
-  ////console.log("path:", path);
-  ////console.log("subItems:", subItems);
+ 
 
   const toggleSubMenu = () => {
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    ////console.log("useEffect triggered");
     const activeSub = subItems.find((item) => currentRoute === item.path);
     if (activeSub) {
       setIsOpen(true);
@@ -103,6 +101,8 @@ const MenuItem = ({ title, icon, subItems, path }) => {
 };
 
 const YourComponent = () => {
+  const country = localStorage.getItem("country"); // Get country from localStorage
+
   const menuItems = [
     {
       title: "Company Analytics",
@@ -120,11 +120,16 @@ const YourComponent = () => {
           path: "/pbr/company_analytic/company_brand",
           links: "company_brand",
         },
-        {
-          title: "Company Sku",
-          path: "/pbr/company_analytic/sku",
-          links: "sku",
-        },
+        // Exclude "Company Sku" if the country is Ghana
+        ...(country !== "ghana"
+          ? [
+              {
+                title: "Company Sku",
+                path: "/pbr/company_analytic/sku",
+                links: "sku",
+              },
+            ]
+          : []),
       ],
     },
     {
@@ -137,14 +142,7 @@ const YourComponent = () => {
           title: "Retail Market Overview",
           path: "/pbr/therapy/market",
         },
-        // {
-        //   title: "Therapy Area",
-        //   path: "/pbr/therapy/therapy", 
-        // },
-        // {
-        //   title: "Market Size Model",
-        //   path: "/pbr/therapy/market-Modal",
-        // },
+       
       ],
     },
     {
@@ -163,24 +161,7 @@ const YourComponent = () => {
 
           links: "sku",
         },
-        // {
-        //   title: "Competitive Analysis",
-        //   path: "/pbr/brand/competitive",
-
-        //   links: "sku",
-        // },
-        // {
-        //   title: "Patient Uptake",
-        //   path: "/pbr/brand/patient",
-
-        //   links: "sku",
-        // },
-        // {
-        //   title: "Co-prescription Analysis",
-        //   path: "/pbr/brand/prescription", 
-
-        //   links: "sku",
-        // },
+       
       ],
     },
     {
@@ -195,12 +176,7 @@ const YourComponent = () => {
           links: "sku",
         },
        
-        // {
-        //   title: "Weighted Selling Distribution",
-        //   path: "/pbr/channel/weighted",
-
-        //   links: "sku",
-        // },
+      
       ],
     },
     {
