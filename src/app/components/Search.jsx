@@ -42,9 +42,9 @@ const SearchBar = () => {
     };
   }, []);
 
-  const pages = [
+  const pages =  [
     {
-      title: "Company Analytic",
+      title: "Company Analytics",
       path: "/pbr/company_analytic/performance",
       links: "performance",
 
@@ -67,27 +67,27 @@ const SearchBar = () => {
       ],
     },
     {
-      title: "Therapy Area Analytic",
+      title: "Therapy Area Analytics",
       path: "/pbr/therapy/market",
       links: "market",
 
       subItems: [
         {
-          title: "Market Overview",
+          title: "Retail Market Overview",
           path: "/pbr/therapy/market",
         },
-        {
-          title: "Therapy Area",
-          path: "/pbr/therapy/therapy", 
-        },
-        {
-          title: "Market Size Model",
-          path: "/pbr/therapy/market-Modal",
-        },
+        // {
+        //   title: "Therapy Area",
+        //   path: "/pbr/therapy/therapy", 
+        // },
+        // {
+        //   title: "Market Size Model",
+        //   path: "/pbr/therapy/market-Modal",
+        // },
       ],
     },
     {
-      title: "Brand Analytic",
+      title: "Brand Analytics",
       path: "/pbr/brand/brand_share",
 
       subItems: [
@@ -97,52 +97,70 @@ const SearchBar = () => {
           links: "sku",
         },
         {
-          title: "Brank SKU",
+          title: "Brand SKU",
           path: "/pbr/brand/brand_sku",
 
           links: "sku",
         },
-        {
-          title: "Competitive Analysis",
-          path: "/pbr/brand/competitive",
+        // {
+        //   title: "Competitive Analysis",
+        //   path: "/pbr/brand/competitive",
 
-          links: "sku",
-        },
-        {
-          title: "Patient Uptake",
-          path: "/pbr/brand/patient",
+        //   links: "sku",
+        // },
+        // {
+        //   title: "Patient Uptake",
+        //   path: "/pbr/brand/patient",
 
-          links: "sku",
-        },
-        {
-          title: "Co-prescription Analysis",
-          path: "/pbr/brand/prescription", 
+        //   links: "sku",
+        // },
+        // {
+        //   title: "Co-prescription Analysis",
+        //   path: "/pbr/brand/prescription", 
 
-          links: "sku",
-        },
+        //   links: "sku",
+        // },
       ],
     },
     {
-      title: "Channel Analytic",
+      title: "Channel Analytics",
       path: "/pbr/channel/numeric",
 
       subItems: [
         {
-          title: "Numeric Selling Distribution",
+          title: "Retail Numeric Distribution",
           path: "/pbr/channel/numeric",
 
           links: "sku",
         },
        
-        {
-          title: "Weighted Selling Distribution",
-          path: "/pbr/channel/weighted",
+        // {
+        //   title: "Weighted Selling Distribution",
+        //   path: "/pbr/channel/weighted",
 
+        //   links: "sku",
+        // },
+      ],
+    },
+    {
+      title: "Support",
+      path: "/pbr/setting2/", // Corrected path
+
+      links: "sku",
+
+      subItems: [
+        {
+          title: "Support",
+          path: "/pbr/setting2", // Corrected path
+          links: "sku",
+        },
+        {
+          title: "Admin",
+          path: "/pbr/settings", // Corrected path
           links: "sku",
         },
       ],
     },
-    
   ];
 
   const flattenedPages = flattenPages(pages);
