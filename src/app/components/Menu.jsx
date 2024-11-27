@@ -105,7 +105,7 @@ const MenuItem = ({ title, icon, subItems, path }) => {
 const YourComponent = () => {
   const menuItems = [
     {
-      title: "Company Analytic",
+      title: "Company Analytics",
       path: "/pbr/company_analytic/performance",
       links: "performance",
 
@@ -148,7 +148,7 @@ const YourComponent = () => {
       ],
     },
     {
-      title: "Brand Analytic",
+      title: "Brand Analytics",
       path: "/pbr/brand/brand_share",
 
       subItems: [
