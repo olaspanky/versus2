@@ -52,19 +52,19 @@ const Home2 =() => {
 
   const boxData = [
     {
-      heading: 'Company Analytics',
+      heading: 'Company Analytic',
       description: 'Explore the performance of over 1,000 companies and compare your organizations achievements with peers in the same therapy area, period, or location. Uncover valuable insights into your market share and growth trends, both in terms of volume and value. This enables you to objectively evaluate your market position, even at the granular therapy area levels.',
     },
     {
-      heading: 'Therapy Area Analytics',
+      heading: 'Therapy Area Analytic',
       description: 'VERSUS encompasses more than 74 therapy areas, empowering you to conduct in-depth analysis and pinpoint opportunities for your brand, team, and organization. From Anatomical Therapeutic Chemical (ATC) Classification Level 1 (based on the area of the body the drug acts on) to ATC Level 5 (chemical substance, International non-proprietary Name (INN), our platform allows you to dive deep into identifying trends and patterns.      ',
     },
     {
-      heading: 'Brand Analytics',
+      heading: 'Brand Analytic',
       description: 'Evaluate your brand and SKU market share and growth trends in comparison to competitors, using both volume and value as objective, data-driven metrics. VERSUS grants you access to explore a vast database containing over 8,000 brands and 10,000 SKUs in the market, providing invaluable guidance for your commercial planning.',
     },
     {
-        heading: 'Channel Analytics',
+        heading: 'Channel Analytic',
       description: 'Understanding the proportion of pharmacies stocking your products and assessing whether your brand is positioned optimally within pharmacies can unlock new avenues for growth. VERSUS equips you with the tools to perform this analysis and more, enabling you to make informed decisions about your market strategy.',
     },
   

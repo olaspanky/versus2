@@ -104,30 +104,30 @@ const MenuItem = ({ title, icon, subItems, path }) => {
 const YourComponent = () => {
   const menuItems = [
     {
-      title: "Company Analytics",
-      path: "/pbr/company_analytic/performance",
+      title: "Company Analytic",
+      path: "/pbr/company_Analytic/performance",
       links: "performance",
 
       subItems: [
         {
           title: "Performance and Ranking",
-          path: "/pbr/company_analytic/performance",
+          path: "/pbr/company_Analytic/performance",
           links: "performance",
         },
         {
           title: "Company Brand",
-          path: "/pbr/company_analytic/company_brand",
+          path: "/pbr/company_Analytic/company_brand",
           links: "company_brand",
         },
         {
           title: "Company Sku",
-          path: "/pbr/company_analytic/sku",
+          path: "/pbr/company_Analytic/sku",
           links: "sku",
         },
       ],
     },
     {
-      title: "Therapy Area Analytics",
+      title: "Therapy Area Analytic",
       path: "/pbr/therapy/market",
       links: "market",
 
@@ -147,12 +147,12 @@ const YourComponent = () => {
       ],
     },
     {
-      title: "Brand Analytics",
+      title: "Brand Analytic",
       path: "/pbr/brand/brand_share",
 
       subItems: [
         {
-          title: "Brand Share Analytics",
+          title: "Brand Share Analytic",
           path: "/pbr/brand/brand_share",
           links: "sku",
         },
@@ -183,7 +183,7 @@ const YourComponent = () => {
       ],
     },
     {
-      title: "Channel Analytics",
+      title: "Channel Analytic",
       path: "/pbr/channel/numeric",
 
       subItems: [

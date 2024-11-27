@@ -21,9 +21,9 @@ export default function Home() {
   useEffect(() => {
     // Set dashboardId based on the country stored in localStorage
     if (country === 'nigeria') {
-      setDashboardId("Nigeria Brand Analytic - Brand Share Analytics Dashboard"); // Nigeria Dashboard ID
+      setDashboardId("Nigeria Brand Analytics - Brand Share Analytics Dashboard"); // Nigeria Dashboard ID
     } else if (country === 'ghana') {
-      setDashboardId("Ghana Brand Analytic - Brand Share Analytics Dashboard"); // Ghana Dashboard ID
+      setDashboardId("Ghana Brand Analytics - Brand Share Analytics Dashboard"); // Ghana Dashboard ID
     } 
   }, [country]); // Add country as dependency to re-run effect when it changes
 

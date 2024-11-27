@@ -13,9 +13,9 @@ export default function PageOne() {
   useEffect(() => {
     // Set dashboardId based on the country stored in localStorage
     if (country === 'nigeria') {
-      setCountryId("Nigeria Company Analytic - Company Brand Dashboard  "); // Nigeria Dashboard ID
+      setCountryId("Nigeria Company Analytics - Company Brand Dashboard  "); // Nigeria Dashboard ID
     } else if (country === 'ghana') {
-      setCountryId("Ghana Company Analytic - Company Brand Dashboard "); // Ghana Dashboard ID
+      setCountryId("Ghana Company Analytics - Company Brand Dashboard "); // Ghana Dashboard ID
     } 
   }, [country]); // Add country as dependency to re-run effect when it changes
 

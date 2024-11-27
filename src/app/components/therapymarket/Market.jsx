@@ -14,9 +14,9 @@ export default function PageOne() {
   useEffect(() => {
     // Set dashboardId based on the country stored in localStorage
     if (country === 'nigeria') {
-      setCountryId("Nigeria Therapy Area Analytic - Market Overview Dashboard"); // Nigeria Dashboard ID
+      setCountryId("Nigeria Therapy Area Analytics - Market Overview Dashboard"); // Nigeria Dashboard ID
     } else if (country === 'ghana') {
-      setCountryId("Ghana Therapy Area Analytic - Market Overview Dashboard"); // Ghana Dashboard ID
+      setCountryId("Ghana Therapy Area Analytics - Market Overview Dashboard"); // Ghana Dashboard ID
     } 
   }, [country]); // Add country as dependency to re-run effect when it changes
 

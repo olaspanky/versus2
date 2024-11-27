@@ -15,11 +15,11 @@ export default function Home() {
 
   useEffect(() => {
     if (country === 'nigeria') {
-      setTrendCountryId("Nigeria Channel Analytic - Numeric Selling Distribution (BRAND) Dashboard"); // Nigeria Dashboard ID
-      setShareCountryId("Nigeria Channel Analytic - Numeric Selling Distribution (SKU) Dashboard"); // Example for Share
+      setTrendCountryId("Nigeria Channel Analytics - Numeric Selling Distribution (BRAND) Dashboard"); // Nigeria Dashboard ID
+      setShareCountryId("Nigeria Channel Analytics - Numeric Selling Distribution (SKU) Dashboard"); // Example for Share
     } else if (country === 'ghana') {
-      setTrendCountryId("Ghana Channel Analytic - Numeric Selling Distribution (BRAND) Dashboard"); // Ghana Dashboard ID
-      setShareCountryId("Ghana Channel Analytic - Numeric Selling Distribution (SKU) Dashboard"); // Example for Share
+      setTrendCountryId("Ghana Channel Analytics - Numeric Selling Distribution (BRAND) Dashboard"); // Ghana Dashboard ID
+      setShareCountryId("Ghana Channel Analytics - Numeric Selling Distribution (SKU) Dashboard"); // Example for Share
     }
     // You can add other countries here if necessary
   }, [country]); // Add country as dependency to re-run effect when it changes
@@ -44,16 +44,18 @@ export default function Home() {
         >
           <h1>BRAND</h1>
         </div>
-        <div
-          onClick={handleShareClick}
-          className={`px-9 py-2 ${
-            isTrendActive
-              ? "text-primary bg-white border border-primary"
-              : "bg-primary text-white"
-          } text-2xl font-extrabold`}
-        >
-          <h1>SKU</h1>
-        </div>
+        {country !== "ghana" && ( // Conditionally render the SKU button
+      <div
+        onClick={handleShareClick}
+        className={`px-9 py-2 ${
+          isTrendActive
+            ? "text-primary bg-white border border-primary"
+            : "bg-primary text-white"
+        } text-2xl font-extrabold`}
+      >
+        <h1>SKU</h1>
+      </div>
+    )}
       </div>
 
       {isTrendActive ? (

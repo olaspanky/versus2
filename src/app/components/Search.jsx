@@ -44,7 +44,7 @@ const SearchBar = () => {
 
   const pages = [
     {
-      title: "Company Analytics",
+      title: "Company Analytic",
       path: "/pbr/company_analytic/performance",
       links: "performance",
 
@@ -67,7 +67,7 @@ const SearchBar = () => {
       ],
     },
     {
-      title: "Therapy Area Analytics",
+      title: "Therapy Area Analytic",
       path: "/pbr/therapy/market",
       links: "market",
 
@@ -87,12 +87,12 @@ const SearchBar = () => {
       ],
     },
     {
-      title: "Brand Analytics",
+      title: "Brand Analytic",
       path: "/pbr/brand/brand_share",
 
       subItems: [
         {
-          title: "Brand Share Analytics",
+          title: "Brand Share Analytic",
           path: "/pbr/brand/brand_share",
           links: "sku",
         },
@@ -123,7 +123,7 @@ const SearchBar = () => {
       ],
     },
     {
-      title: "Channel Analytics",
+      title: "Channel Analytic",
       path: "/pbr/channel/numeric",
 
       subItems: [

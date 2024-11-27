@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import arr from "../../../public/assets/arr.svg";
 import Link from 'next/link';
 
 const BoxGrid = ({ data }) => {
@@ -71,7 +70,7 @@ export default BoxGrid;
 //           <h2 className="text-2xl font-bold text-red-500 mb-4">Access Denied</h2>
 //           <p className="text-gray-700 mb-6">
 //             You are not subscribed to <span className="font-bold">{country}</span>. 
-//             Please contact <a href="mailto:email.com" className="text-blue-500 underline">marketanalytics@pbrinsight.com</a> for assistance.
+//             Please contact <a href="mailto:email.com" className="text-blue-500 underline">marketAnalytic@pbrinsight.com</a> for assistance.
 //           </p>
 //           <button
 //             onClick={onClose}

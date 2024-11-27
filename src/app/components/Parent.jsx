@@ -84,7 +84,7 @@ const [embeddingContext, setEmbeddingContext] = useState(null);
     <>
       <main className=''>
         <div className='flex justify-between items-center my-5'>
-          <div className=''><h1 className='text-4xl font-extrabold '>Market Size Model Analytics Dashboard :</h1></div>
+          <div className=''><h1 className='text-4xl font-extrabold '>Market Size Model Analytic Dashboard :</h1></div>
           <div className='bg-white flex flex-col p-2 px-2 gap-2 font-semibold rounded-md border border-gray-50 shadow-md'>
             <h1 className='text-3xl text-gray-500'>132,564 </h1>
             <p className='text-black'>n=Total patient encountered</p>
