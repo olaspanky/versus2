@@ -92,7 +92,7 @@ const Home2 =() => {
 
     },
     {
-      title: '1.5M',
+      title: '3M',
       description: 'Transactions',
       icon: pharm,
       icon2: pharmw
