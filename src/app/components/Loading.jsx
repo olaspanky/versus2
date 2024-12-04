@@ -1,38 +1,54 @@
-import { Loader2 } from "lucide-react";
+import React from 'react';
 
-const Loading = () => {
+const DashboardSkeletonLoader = () => {
   return (
-    <div className=" flex flex-col items-center justify-center">
-      <div className="flex flex-col justify-center items-center text-center space-y-6">
-        <Loader2 className="w-16 h-16 text-blue-600 animate-spin mx-auto" />
-        
-        <div className="space-y-2">
-          <h2 className="text-xl font-semibold text-gray-800">
-            Loading Your Dashboard
-          </h2>
-          <p className="text-gray-600 max-w-sm mx-auto">
-            Please wait while we prepare your data visualization experience
-          </p>
-        </div>
+    <div className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+      <div className="flex justify-between items-center mb-6">
+        <div className="h-8 bg-gray-300 rounded w-1/3"></div>
+        <div className="h-8 bg-gray-300 rounded w-1/4"></div>
+      </div>
 
-        <div className="w-64 h-2 bg-gray-200 rounded-full mx-auto overflow-hidden">
-          <div className="h-full bg-blue-600 rounded-full animate-[progressBar_2s_ease-in-out_infinite]" 
-               style={{
-                 animation: `progressBar 2s ease-in-out infinite`,
-                 width: '0%'
-               }} />
-        </div>
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        {[1, 2, 3].map((card) => (
+          <div key={card} className="bg-gray-200 rounded-lg p-4">
+            <div className="h-4 bg-gray-300 rounded w-2/3 mb-2"></div>
+            <div className="h-12 bg-gray-300 rounded"></div>
+          </div>
+        ))}
+      </div>
 
-        <style jsx global>{`
-          @keyframes progressBar {
-            0% { width: 0%; }
-            50% { width: 100%; }
-            100% { width: 0%; }
-          }
-        `}</style>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
+        <div className="bg-gray-200 rounded-lg p-4 h-48">
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-300 rounded"></div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Loading;
+export default DashboardSkeletonLoader;
