@@ -15,7 +15,7 @@ export default function PageOne() {
     if (country === 'nigeria') {
       setDashboardId("c405b651-d394-48f2-a835-ecfc7ad7c1e2"); // Nigeria Dashboard ID
     } else if (country === 'ghana') {
-      setDashboardId("6e24bf7f-e78c-49b9-aa84-c78ba306c783"); // Ghana Dashboard ID
+      setDashboardId("3a115ebe-479f-4cd3-9df7-d3a6fc33fefa"); // Ghana Dashboard ID
     } else if (country === 'kenya') {
       setDashboardId("3a115ebe-479f-4cd3-9df7-d3a6fc33fefa"); // Kenya Dashboard ID
     } else {
