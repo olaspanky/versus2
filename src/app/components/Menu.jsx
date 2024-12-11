@@ -120,16 +120,14 @@ const YourComponent = () => {
           path: "/pbr/company_analytic/company_brand",
           links: "company_brand",
         },
-        // Exclude "Company Sku" if the country is Ghana
-        ...(country !== "ghana"
-          ? [
+       
               {
                 title: "Company Sku",
                 path: "/pbr/company_analytic/sku",
                 links: "sku",
               },
-            ]
-          : []),
+            
+         
       ],
     },
     {
