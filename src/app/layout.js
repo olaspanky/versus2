@@ -4,7 +4,7 @@ import { Providers } from './store/provider'
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
 import UserPool from './UserPool';
-
+import Metrics from './metrics';
 
 Amplify.configure({ ...awsExports, ssr: true });
 
@@ -34,6 +34,7 @@ export default function RootLayout({ children }) {
 
       <Providers>
       {children}
+      <Metrics/>
         </Providers>
         
         </body>
