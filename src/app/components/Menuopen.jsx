@@ -106,13 +106,13 @@ const YourComponent = () => {
   const menuItems = [
     {
       title: "Company Analytics",
-      path: "/pbr/company_analytic/performance",
+      path: "#",
       links: "performance",
 
       subItems: [
         {
           title: "Performance and Ranking",
-          path: "/pbr/company_analytic/performance",
+          path: "#",
           links: "performance",
         },
 
