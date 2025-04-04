@@ -189,7 +189,7 @@ export default function Index() {
   if (!showDashboard) {
     return (
       <main className="flex  h-full w-full flex-col gap-9 font-custom2">
-          <div className="left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
+          <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
         <div className="flex items-center">
         <div className="flex justify-center">
           
@@ -199,7 +199,7 @@ export default function Index() {
         <div className="flex justify-center">
           <button
             onClick={() => setShowDashboard(true)}
-            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
           >
             View Free Dashboard
           </button>
@@ -213,7 +213,7 @@ export default function Index() {
         </div>
       </div>
 
-        <div className="my-7 p-5 flex flex-col gap-5">
+        <div className=" mt-20 my-7 p-5 flex flex-col gap-5">
           <div>
             <h1 className="text-2xl font-extrabold text-primary font-custom">
               Welcome To VERSUS™
@@ -232,11 +232,11 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="font-custom">
+        <div className="font-custom p-5">
           <Clip data={Clipdata} />
         </div>
 
-        <div className="my-3 flex flex-wrap-reverse md:flex-nowrap gap-20 justify-between p-3 md:p-9 bg-white rounded-md items-center">
+        <div className="my-3 p-5 flex flex-wrap-reverse md:flex-nowrap gap-20 justify-between p-3 md:p-9 bg-white rounded-md items-center">
           <div className="w-1/4">
             <Image alt="VERSUS Dashboard" src={data} />
           </div>
