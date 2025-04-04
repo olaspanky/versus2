@@ -204,12 +204,7 @@ export default function Index() {
             View Free Dashboard
           </button>
         </div>
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
-          >
-            {isSidebarOpen ? "Close" : "Log In"}
-          </button>
+         
         </div>
       </div>
 
