@@ -136,7 +136,7 @@ const Sidebar = ({ title, icon, subItems }) => {
 
         <div>
           <div className="relative transition mt-9">
-            <Link href="/pbr/home2">
+            <Link href="#">
               <div className={`relative m-2 flex items-center gap-2 rounded-xl py-3 pl-5 text-sm text-white ${currentRoute === "/pbr/home2" ? "bg-[#81B1D0]" : ""}`}>
                 <Image alt="Home" src={home} />
                 {isOpen && <h1 className="text-lg font-semibold">Homepage</h1>}
@@ -160,12 +160,7 @@ const Sidebar = ({ title, icon, subItems }) => {
 
         <div className="mt-auto mb-20">
           <div className="w-full border border-gray-200 opacity-5"></div>
-          <div className="relative fixed m-2">
-            <button className="flex items-center gap-2 rounded-xl py-3 pl-5 text-sm text-white" onClick={handleSignOut}>
-              <Image alt="Logout" src={logout} />
-              {isOpen && <h1 className="text-lg text-white opacity-50 font-semibold">Logout</h1>}
-            </button>
-          </div>
+         
         </div>
       </div>
     </div>

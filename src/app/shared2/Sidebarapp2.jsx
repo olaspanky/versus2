@@ -6,15 +6,8 @@ import { useRouter } from "next/navigation";
 import logo from "../../../public/assets/logo.svg";
 import home from "../../../public/assets/home.svg";
 import logout from "../../../public/assets/logout.svg";
-import Menu from "../components2/Menu";
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import UserPool from "../UserPool";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser, clearUser } from "../store/slice/userSlice";
-import Cookies from 'js-cookie';
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-import useAutoSignOut from '../components/useAutoSignOut';
+import Menu from "../components/Menuopen";
+
 
 
 const Sidebar = ({ title, icon, subItems }) => {
@@ -22,7 +15,6 @@ const Sidebar = ({ title, icon, subItems }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentRoute = usePathname();
-  const { data: session } = useSession();
 
 
   const toggleSidebar = () => {
@@ -136,7 +128,7 @@ const Sidebar = ({ title, icon, subItems }) => {
 
         <div>
           <div className="relative transition mt-9">
-            <Link href="/pbr/home2">
+            <Link href="#">
               <div className={`relative m-2 flex items-center gap-2 rounded-xl py-3 pl-5 text-sm text-white ${currentRoute === "/pbr/home2" ? "bg-[#81B1D0]" : ""}`}>
                 <Image alt="Home" src={home} />
                 {isOpen && <h1 className="text-lg font-semibold">Homepage</h1>}
@@ -161,10 +153,7 @@ const Sidebar = ({ title, icon, subItems }) => {
         <div className="mt-auto mb-20">
           <div className="w-full border border-gray-200 opacity-5"></div>
           <div className="relative fixed m-2">
-            <button className="flex items-center gap-2 rounded-xl py-3 pl-5 text-sm text-white" onClick={handleSignOut}>
-              <Image alt="Logout" src={logout} />
-              {isOpen && <h1 className="text-lg text-white opacity-50 font-semibold">Logout</h1>}
-            </button>
+           
           </div>
         </div>
       </div>

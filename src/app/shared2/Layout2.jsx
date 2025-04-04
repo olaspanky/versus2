@@ -124,12 +124,7 @@ const Layout2 = ({ children }) => {
         </div>
         <div className='bg-gray-100 flex flex-col text-sm w-full font-light h-full'>
          
-          <div className='z-20 mt-2 px-3 lg:px-9 bg-[#f6f6f6] w-full h-auto custom-scrollbar'>
-          <TawkMessengerReact
-                propertyId="66c47c33ea492f34bc08163c"
-                widgetId="1i5noaafu"/>
-            {children}
-          </div>
+         
         </div>
       </div>
     </div>
