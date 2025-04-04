@@ -188,8 +188,32 @@ export default function Index() {
 
   if (!showDashboard) {
     return (
-      <main className="flex h-full w-full flex-col gap-9 font-custom2">
-        <div className="my-7 flex flex-col gap-5">
+      <main className="flex  h-full w-full flex-col gap-9 font-custom2">
+          <div className="left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
+        <div className="flex items-center">
+        <div className="flex justify-center">
+          
+        </div>
+        </div>
+        <div className="flex items-center gap-4">
+        <div className="flex justify-center">
+          <button
+            onClick={() => setShowDashboard(true)}
+            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+          >
+            View Free Dashboard
+          </button>
+        </div>
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
+          >
+            {isSidebarOpen ? "Close" : "Log In"}
+          </button>
+        </div>
+      </div>
+
+        <div className="my-7 p-5 flex flex-col gap-5">
           <div>
             <h1 className="text-2xl font-extrabold text-primary font-custom">
               Welcome To VERSUS™
@@ -227,14 +251,7 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <button
-            onClick={() => setShowDashboard(true)}
-            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
-          >
-            View Free Dashboard
-          </button>
-        </div>
+      
       </main>
     );
   }
@@ -246,14 +263,21 @@ export default function Index() {
 
       {/* Topbar */}
       <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
-        <div className="flex items-center"></div>
+        <div className="flex items-center">
+          <button
+            onClick={() => setShowDashboard(false)}
+            className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition duration-300"
+          >
+            Back
+          </button>
+        </div>
         <div className="flex items-center gap-4">
           <span className="text-gray-600">
-            {session && session.user ? `Welcome, ${session.user.email}` : "Guest"}
+            {session && session.user ? `Welcome, ${session.user.email}` : "Go Premium"}
           </span>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
           >
             {isSidebarOpen ? "Close" : "Log In"}
           </button>
@@ -268,7 +292,7 @@ export default function Index() {
             isSidebarOpen ? "mr-96" : "mr-0"
           }`}
         >
-            <Openca />
+          <Openca />
         </div>
 
         {/* Sidebar */}
