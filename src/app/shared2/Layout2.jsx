@@ -8,7 +8,6 @@ import Topbar from './Topbar';
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import '@aws-amplify/ui-react/styles.css';
-import withAuth from '../utilities/withAuth';
 import TimeMe from 'timeme.js';
 import { useSession } from "next-auth/react";
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
@@ -131,5 +130,5 @@ const Layout2 = ({ children }) => {
   );
 };
 
-export default withAuth(Layout2);
+export default Layout2;
 
