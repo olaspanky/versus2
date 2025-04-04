@@ -1,25 +1,17 @@
-
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import google from "../../public/assets/google.png";
 import mi from "../../public/assets/mi.png";
 import logo from "../../public/assets/login_logo.svg";
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import UserPool from "./UserPool";
-import { useDispatch } from "react-redux";
-import { setUser } from "./store/slice/userSlice";
-import Cookies from "js-cookie";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import useAutoSignOut from './components/useAutoSignOut';
-import PasswordModal from "./components/PasswordModal"; // Import the PasswordModal component
-import { getDeviceIdentifier } from './components/getDeviceIdentifier';
-
+import Openca from "./components/company_analytic/Openca"; // Adjust path as needed
+import PasswordModal from "./components/PasswordModal"; // Adjust path as needed
+import { getDeviceIdentifier } from "./components/getDeviceIdentifier"; // Adjust path as needed
+import Layout2 from "./shared2/Layout2";
 
 const CustomAlert = ({ message, type }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,20 +19,19 @@ const CustomAlert = ({ message, type }) => {
   useEffect(() => {
     if (message) {
       setIsVisible(true);
-      const timeoutId = setTimeout(() => {
-        setIsVisible(false);
-      }, 3000);
-
+      const timeoutId = setTimeout(() => setIsVisible(false), 3000);
       return () => clearTimeout(timeoutId);
     }
   }, [message]);
 
- 
-
-  const alertClass = type === "success" ? "text-primary text-xl" : "text-red-500";
+  const alertClass = type === "success" ? "text-green-600 text-xl" : "text-red-500";
 
   return (
-    <div className={`p-3 ${alertClass} ${isVisible ? "slide-in border bg-white mt-5" : "slide-out"}`}>
+    <div
+      className={`fixed top-5 left-1/2 transform -translate-x-1/2 p-3 ${alertClass} ${
+        isVisible ? "opacity-100" : "opacity-0"
+      } transition-opacity duration-300 border bg-white shadow-md rounded`}
+    >
       {message}
     </div>
   );
@@ -48,20 +39,19 @@ const CustomAlert = ({ message, type }) => {
 
 export default function Home() {
   const [email, setEmail] = useState("");
-  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [signInText, setSignInText] = useState("Sign in");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to handle modal visibility
-  const [deviceId, setDeviceId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar toggle
+  const router = useRouter();
+  const { data: session } = useSession();
 
-
-  const showAlert = (message, type) => {
+  const showAlert = (message) => {
     setAlertMessage(message);
     setAlertType(type);
     setTimeout(() => {
@@ -70,31 +60,20 @@ export default function Home() {
     }, 3000);
   };
 
-  const { data: session } = useSession();
-  if(session && session.user){
-    const email = session?.user?.email;
-  }
-
-
-  // useEffect(() => {
-  //   const id = getDeviceIdentifier();
-  //   setDeviceId(id);
-  //   console.log("Device ID set to", id);
-  // }, []);
+  useEffect(() => {
+    if (session && session.user) {
+      router.push("/pbr/home2"); // Redirect if logged in
+    }
+  }, [session, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { deviceId, browserName, deviceName, deviceDevice } = getDeviceIdentifier();
-    console.log("Device info:", deviceId, browserName, deviceName,  deviceDevice);
-    console.log("deviceid is", deviceId);
 
     if (!deviceId) {
       showAlert("Unable to identify device.", "error");
       return;
     }
-    console.log("deviceid is", deviceId);
-
-   
 
     setIsLoading(true);
     setSignInText("Signing in...");
@@ -107,23 +86,18 @@ export default function Home() {
         deviceId,
         browserName,
         deviceName,
-        deviceDevice
+        deviceDevice,
       });
 
-      if (res.error) {
-        if (res.error === "You are already logged in on another device.") {
-          setError("You are logged in on another device.");
-          showAlert(res.error, "error");
-        } else {
-          setError(res.error);
-          showAlert(res.error, "error");
-        }
+      if (res?.error) {
+        setError(res.error);
+        showAlert(res.error, "error");
         setIsLoading(false);
         setSignInText("Sign in");
         return;
       }
 
-      if (res.ok) {
+      if (res?.ok) {
         showAlert("Logged in successfully!", "success");
         router.push("/pbr/home2");
       } else {
@@ -145,121 +119,111 @@ export default function Home() {
   };
 
   return (
-    <main className="flex max-h-[100vh] flex-col items-center justify-between bg-white font-custom2">
+    <main className="flex min-h-screen flex-col bg-gray-100 font-custom2">
       <CustomAlert message={alertMessage} type={alertType} />
-      <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> {/* Add the PasswordModal component */}
-      <div className="w-full flex flex-row">
-        <div className="items-start justify-start hidden bg-bgImage bg-contain bg-no-repeat bg-center lg:flex flex-col gap-5 w-[50%] px-20 p-9">
-          <div className="mb-9">
-            <Image alt="alt" src={logo} />
-          </div>
-          <div>
-            <h1 className="text-3xl font-extrabold">VERSUS&#8482;</h1>
-          </div>
-          <div>
-            <p className="text-md text-gray-600">
-              Access user-friendly analysis and visualization of anonymized
-              <br />
-              dispensing data collected from the retail pharmacies.
-            </p>
-          </div>
+      <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+      {/* Topbar */}
+      <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
+        <div className="flex items-center">
+          
         </div>
-        <div className="md:p-[5rem] flex flex-col justify-center items-center px-2 w-full lg:w-auto">
-          <div className="flex flex-col md:gap-5 my-10 justify-center">
-            <div className="mb-9 md:hidden">
-              <Image alt="alt" src={logo} />
-            </div>
-            <div>
-              <h1 className="text-3xl md:text-5xl font-extrabold">
-                Welcome To VERSUS&#8482;
-              </h1>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <section className="my-9 flex flex-col gap-9 w-full">
-              
-                  
+        <div className="flex items-center gap-4">
+          <span className="text-gray-600">
+            {session && session.user ? `Welcome, ${session.user.email}` : "Guest"}
+          </span>
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+          >
+            {isSidebarOpen ? "Close" : "Log In"}
+          </button>
+        </div>
+      </div>
 
-                  {session && session.user ? (
-                    <div>
-  <Link href="/pbr/home2">
-                      <button className="bg-primary py-3 w-full text-white px-3 rounded-md text-center">
-Continue to VERSUS&#8482;                      </button>
-                    </Link>
-                    </div>
-                  
-                  ) : (
-                    <section className="my-9 flex flex-col gap-9 lg:w-[90%]">
+      {/* Main Content */}
+      <div className="flex flex-1 pt-16"> {/* Adjust padding-top for topbar height */}
+        {/* Openca Dashboard */}
+        <div
+          className={`flex-1 transition-all duration-300 ${
+            isSidebarOpen ? "mr-96" : "mr-0"
+          }`}
+        >
+          <Layout2>
+          <Openca />
+          </Layout2>
+          
+        </div>
 
-                    <div className="flex flex-col gap-5">
-                    <div className="flex flex-col">
-                      <label htmlFor="email" className="text-gray-700 font-semibold mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="border border-gray-300 w-full rounded-md py-3 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                    </div>
-                    <div className="flex flex-col p-1">
-                      <label htmlFor="password" className="text-gray-700 font-semibold mb-1">
-                        Password
-                      </label>
-                      <div className="flex flex-row border justify-between border-gray-300 p-1 rounded-md">
-                        <input
-                          type={showPassword ? "text" : "password"}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                          className="w-full outline-none p-2"
-                        />
-                        <button
-                          type="button"
-                          className="focus:outline-none mx-2"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                        </button>
-                      </div>
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center">
-                          <input type="checkbox" id="remember" className="mr-2" />
-                          <label htmlFor="remember" className="text-sm text-gray-700">
-                            Remember me
-                          </label>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-700 cursor-pointer" onClick={handleForgotPasswordClick}>
-                            Forgotten Password
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    <button
-                    className="bg-primary py-3 text-white px-3 rounded-md"
-                    onClick={handleSubmit}
-                    disabled={isLoading}
+        {/* Sidebar */}
+        <div
+          className={`fixed top-16 right-0 h-[calc(100vh-4rem)] bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+            isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          } w-96 p-6 z-10`}
+        >
+          <div className="flex flex-col h-full py-32">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Log In to VERSUS™</h2>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 flex-1">
+              <div className="flex flex-col">
+                <label htmlFor="email" className="text-gray-700 font-semibold mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="password" className="text-gray-700 font-semibold mb-1">
+                  Password
+                </label>
+                <div className="flex border border-gray-300 rounded-md p-1">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="w-full outline-none p-2"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="focus:outline-none mx-2"
                   >
-                    {isLoading ? (
-                      <>
-                        <span className="mr-2">Loading...</span>
-                      </>
-                    ) : (
-                      signInText
-                    )}
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </button>
-                  </section>)}
-                                    {error && <p className="error text-red-600 text-sm ">{error}</p>}
-
-                  <div>
-                    <p>Don't have an account yet? Contact us</p>
+                </div>
+                <div className="flex items-center justify-between mt-2 text-sm text-gray-700">
+                  <div className="flex items-center">
+                    <input type="checkbox" id="remember" className="mr-2" />
+                    <label htmlFor="remember">Remember me</label>
                   </div>
-                <div className="md:flex gap-3 justify-between"></div>
-              </section>
+                  <p className="cursor-pointer" onClick={handleForgotPasswordClick}>
+                    Forgotten Password
+                  </p>
+                </div>
+              </div>
+              {error && <p className="text-red-600 text-sm">{error}</p>}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300"
+              >
+                {isLoading ? "Signing in..." : signInText}
+              </button>
             </form>
+            <p className="text-center text-gray-600 mt-4">
+  Don’t have an account yet? Contact us at{" "}
+  <a
+    href="mailto:marketanalytics@pbrinsight.com"
+    className="text-blue-600 hover:underline"
+  >
+    marketanalytics@pbrinsight.com
+  </a>
+</p>
           </div>
         </div>
       </div>
