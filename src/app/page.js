@@ -188,7 +188,7 @@ export default function Index() {
 
   if (!showDashboard) {
     return (
-      <main className="flex h-full w-full flex-col gap-9 font-custom2 p-5">
+      <main className="flex h-full w-full flex-col gap-9 font-custom2">
         <div className="my-7 flex flex-col gap-5">
           <div>
             <h1 className="text-2xl font-extrabold text-primary font-custom">
@@ -206,15 +206,6 @@ export default function Index() {
               and objective dashboards, including:
             </p>
           </div>
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            onClick={() => setShowDashboard(true)}
-            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
-          >
-            View Free Dashboard
-          </button>
         </div>
 
         <div className="font-custom">
@@ -236,7 +227,14 @@ export default function Index() {
           </div>
         </div>
 
-
+        <div className="flex justify-center">
+          <button
+            onClick={() => setShowDashboard(true)}
+            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+          >
+            View Free Dashboard
+          </button>
+        </div>
       </main>
     );
   }
@@ -247,15 +245,15 @@ export default function Index() {
       <PasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       {/* Topbar */}
-      <div className=" left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
+      <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-100">
         <div className="flex items-center"></div>
         <div className="flex items-center gap-4">
           <span className="text-gray-600">
-            {session && session.user ? `Welcome, ${session.user.email}` : "Go Premium"}
+            {session && session.user ? `Welcome, ${session.user.email}` : "Guest"}
           </span>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary transition duration-300"
+            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
           >
             {isSidebarOpen ? "Close" : "Log In"}
           </button>
@@ -263,16 +261,14 @@ export default function Index() {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 pt-16">
         {/* Openca Dashboard */}
         <div
-          className={`flex-1 transition-all duration-300 ${
+          className={`flex-1 transition-all duration-300 p-5 ${
             isSidebarOpen ? "mr-96" : "mr-0"
           }`}
         >
-          <Layout2>
             <Openca />
-          </Layout2>
         </div>
 
         {/* Sidebar */}
@@ -281,7 +277,7 @@ export default function Index() {
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
           } w-96 p-6 z-10`}
         >
-          <div className="flex flex-col h-full xl:py-24">
+          <div className="flex flex-col h-full py-32">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Log In to VERSUS™</h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-5 flex-1">
               <div className="flex flex-col">
